@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+* { margin: 0; padding: 0; font-weight: 300; } 
+body { 
+  position: relative; height: 100%;
+  margin: 0; padding: 1em; word-break: break-word; 
+  font-family: Malgun Gothic, Dotum, AppleGothic, Arial, Sans-serif; font-size: 16px; 
+}
+footer { margin: 30px 0; padding: 20px 0; text-align: center; border-top: solid 1px #ebebeb; }
+footer a { color: #000; }
+footer a:hover { text-decoration: underline; }
+
+.hidden { display: none }
+a { color: #6fa8dc; font-weight: 300; text-decoration: none; }
+.btn,
+button {
+  background-color: #d84a38; border: none; border-radius: 2px; color: white; 
+  font-size: 0.8em; margin: 0 0 1em 0; padding: 0.6em 0.7em 0.6em 0.7em; cursor: pointer;
+}
+.btn:active,
+.btn:hover,
+button:active,
+button:hover { background-color: #cf402f; }
+.btn[disabled],
+button[disabled] { color: #ccc; cursor: default; }
+.btn[disabled]:hover,
+button[disabled]:hover { background-color: #d84a38 }
+h1 {
+ border-bottom: 1px solid #ccc; height: 50px; line-height: 50px;
+ font-weight: bold; margin: 0; padding: 0 0 0.2em 0;
+}
+h1 a { font-weight: 300; margin: 0 10px 0 0; white-space: nowrap; }
+
+#wrap { 
+	position: relative; width: 600px; margin: 200px auto; font-size: 1.2em; text-align: center;
+}
+input[type="text"] { padding: 2px 5px; border: solid 1px #bbb; font-size: 1.3em; width: 120px; }
+#your-name { width: 250px; }
+#wrap button { vertical-align: top; min-width: 80px; }
+#wrap p { margin: 10px 0; }
+
+header { position: relative; margin-bottom: 10px; }
+
+/* chat */
+#chat-wrap { margin: 0 auto; width: 300px; }
+#chat-wrap input[type="text"] {
+  width: 200px; font-size: 14px; padding: 6px; background: rgba(255,255,255,0.8); font-family: inherit; 
+}
+#chat-content { 
+  padding: 10px; margin-bottom: 5px; height: 300px; 
+  overflow-y: auto; border: solid 1px #ccc; background: rgba(255,255,255,0.8);
+}
+
+#chat-content li { clear: both; margin-bottom: 8px; padding-bottom: 1px; height: auto; overflow: hidden; }
+#chat-content li * { padding: 2px 5px; font-size: 10px; display: inline-block; }
+#chat-content .name { background: #333; color: #fff; border-radius: 3px; vertical-align: top; }
+#chat-content .message {
+  max-width: 170px; font-size: 12px; background: #E5F1FB; border-radius: 3px; color: #000;
+  box-shadow: 1px 1px 0 rgba(80, 80, 80, 0.3);
+}
+#chat-content .message .date {
+  padding: 2px 0; margin-top: 5px; border-top: dotted 1px #fff; color: #666; font-size: 10px;
+}
+#chat-content .me * { float: right; }
+#chat-content .me .name { margin-left: 5px; }
+#chat-content .me .message { background-color: rgba(243, 178, 176, 0.3); }
+#chat-content .notice { margin: 0 0 8px; font-size: 0.8em; }
+

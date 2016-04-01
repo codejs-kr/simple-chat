@@ -1,0 +1,14 @@
+{
+  "author": "dodortus",
+  "name": "simple-chatting",
+  "version": "0.0.1",
+  "description": "nodejs simple chatting.",
+  "dependencies": {
+  	"express": "4.13.*",
+  	"ejs": "2.4.*",
+  	"socketio": "1.4.*"
+  },
+  "engine": {
+		"node": "0.12.x"
+	}
+}
