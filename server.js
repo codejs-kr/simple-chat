@@ -16,11 +16,12 @@ app.get('/', function(req, res) {
 // socket 
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.broadcast.emit('');
   
   socket.on('message', function(msg) {
     console.log('message: ' + msg);
-    io.emit('message', msg);
+    
+    socket.broadcast.emit('message', msg);
+    //io.emit('message', msg);
   });
 });
 
