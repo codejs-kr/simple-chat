@@ -23,6 +23,25 @@ io.on('connection', function(socket){
     socket.broadcast.emit('message', msg);
     //io.emit('message', msg);
   });
+  
+  socket.on('disconnect', function() {
+    console.log('a user disconnected');
+  });
+  
+  // 참여
+  socket.on('join', function(nickName) {
+  	socket.broadcast.emit('join', nickName);
+  });
+  
+  // 나가기
+  socket.on('leave', function(nickName) {
+  	socket.broadcast.emit('leave', nickName);
+  });
+  
+  // 타이핑
+  socket.on('typing', function(nickName) {
+  	socket.broadcast.emit('typing', nickName);
+  });
 });
 
 // static 은 view 선언 다음에 사용
