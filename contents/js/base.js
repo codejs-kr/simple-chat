@@ -7,6 +7,9 @@
 $(function() {
   var socket = io();
   var nickName = /* prompt('닉네임을 입력해 주세요') || */ 'Guest-' + new Date().getTime();
+	var roomId = '';
+  var $body = $('body');
+  var $roomName = $('#room-name');
   var $msgInput = $('#message');
   var $typing = $('#typing-icon');
   
@@ -35,18 +38,39 @@ $(function() {
   	].join('\n'));
   }
   
-  // 참여 이벤트
-  socket.emit('join', nickName);
-  socket.on('join', function(nickName) {
+  function getRandomNum() {
+  	return Math.floor(Math.random() * 10000) + 1; // 1~10000
+  }
+  
+  // 해시 체크
+  if (location.hash.length >= 2) {
+  	$roomName.val(location.hash.split('#')[1]);
+  }
+  
+  // 룸생성, 참여 이벤트
+  $('#create-room').click(function() {
+	  socket.emit('joinRoom', getRandomNum(), nickName);
+  });  
+  
+  $('#join-room').click(function() {
+  	socket.emit('joinRoom', $roomName.val(), nickName);
+  });
+  
+  socket.on('joinRoom', function(roomId, nickName) {
+  	roomId = roomId;
+  	location.hash = roomId;
+  	$body.addClass('is-room');
   	addSystemMessage("<strong>" + nickName + "</strong> 님이 참여하였습니다.");
   });
   
-  // 종료 이벤트
+  // 로비로 이동
   $('#leave-room').click(function() {
-  	socket.emit('leave', nickName);
+  	socket.emit('leaveRoom', roomId, nickName);
+  	location.hash = '';
+  	location.reload();
   });
   
-  socket.on('leave', function(nickName) {
+  socket.on('leaveRoom', function(nickName) {
   	addSystemMessage("<strong>" + nickName + "</strong> 님이 나갔습니다.");
   });
   

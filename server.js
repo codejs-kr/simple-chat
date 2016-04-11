@@ -6,6 +6,7 @@ var	express = require('express')
 	
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/views');
+app.use(express.static(__dirname + '/contents'));
 
 app.get('/', function(req, res) {
 	res.render('index.html', {
@@ -16,36 +17,42 @@ app.get('/', function(req, res) {
 // socket 
 io.on('connection', function(socket){
   console.log('a user connected');
+  var roomId = null;
   
+  // 룸접속
+  socket.on('joinRoom', function(room, nickName) {
+  	roomId = room;
+	  socket.join(roomId);  	
+  	io.sockets.in(roomId).emit('joinRoom', roomId, nickName);
+  	console.log('ROOM LIST', io.sockets.adapter.rooms);
+  });
+  
+  // 룸퇴장
+  socket.on('leaveRoom', function(room, nickName) {
+  	socket.leave(roomId);
+  	socket.broadcast.to(roomId).emit('leaveRoom', nickName);
+  });
+  
+  // 메시징
   socket.on('message', function(msg) {
-    console.log('message: ' + msg);
+    //console.log('message: ' + msg);
     
-    socket.broadcast.emit('message', msg);
-    //io.emit('message', msg);
-  });
-  
-  socket.on('disconnect', function() {
-    console.log('a user disconnected');
-  });
-  
-  // 참여
-  socket.on('join', function(nickName) {
-  	socket.broadcast.emit('join', nickName);
-  });
-  
-  // 나가기
-  socket.on('leave', function(nickName) {
-  	socket.broadcast.emit('leave', nickName);
+    socket.broadcast.to(roomId).emit('message', msg); // 자신 제외 룸안의 유저
+    //socket.broadcast.emit('message', msg); 					// 자신 제외 메시지 전송  
+    //io.emit('message', msg); 							 					// 자신 포함 전체 룸 메시지 전송
+    //io.sockets.in(roomId).emit('message', msg); 		// 자신 포함 룸안의 유저
   });
   
   // 타이핑
   socket.on('typing', function(nickName) {
-  	socket.broadcast.emit('typing', nickName);
+  	socket.broadcast.to(roomId).emit('typing', nickName);
+  });
+  
+  // 소켓 연결해제
+  socket.on('disconnect', function() {
+    console.log('a user disconnected');
   });
 });
-
-// static 은 view 선언 다음에 사용
-app.use(express.static(__dirname + '/contents'));
 
 // server listen start
 http.listen(config.webserver.port, function() {
