@@ -6,7 +6,7 @@
  */
 $(function() {
   var socket = io();
-  var nickName = /* prompt('닉네임을 입력해 주세요') || */ 'Guest-' + new Date().getTime();
+  var nickName = /*prompt('닉네임을 입력해 주세요') ||*/ 'Guest-' + getRandomNum(1000);
 	var roomId = '';
   var $body = $('body');
   var $roomName = $('#room-name');
@@ -20,13 +20,13 @@ $(function() {
   }
   
   function addUserMessage(nickName, msg, isMe) {
-  	$('#chat-content').append([
-    	"<li class='" + (isMe ? 'me' : '') + "'>",
-    		"<strong class='name'>" + (isMe ? 'Me' : nickName)  + "</strong>",
-    		"<p class='message'>" + msg + 
-    			"<span class='date'>" + getTime() + "</span>",
-  			"</p>",
-    	"</li>"
+  		$('#chat-content').append([
+	    	"<li class='" + (isMe ? 'me' : '') + "'>",
+	    		"<strong class='name'>" + (isMe ? 'Me' : nickName)  + "</strong>",
+	    		"<p class='message'>" + msg + 
+	    			"<span class='date'>" + getTime() + "</span>",
+	  			"</p>",
+	    	"</li>"
     ].join('\n'));
   }
   
@@ -38,49 +38,77 @@ $(function() {
   	].join('\n'));
   }
   
-  function getRandomNum() {
-  	return Math.floor(Math.random() * 10000) + 1; // 1~10000
+  function getRandomNum(max) {
+		return Math.floor(Math.random() * max) + 1; // 1 ~ max
   }
   
   // 해시 체크
   if (location.hash.length >= 2) {
-  	$roomName.val(location.hash.split('#')[1]);
+		$roomName.val(location.hash.split('#')[1]);
   }
   
   // 룸생성, 참여 이벤트
   $('#create-room').click(function() {
-	  socket.emit('joinRoom', getRandomNum(), nickName);
+	  socket.emit('joinRoom', getRandomNum(10000), nickName);
   });  
   
   $('#join-room').click(function() {
   	socket.emit('joinRoom', $roomName.val(), nickName);
   });
   
-  socket.on('joinRoom', function(roomId, nickName) {
-  	roomId = roomId;
+  socket.on('joinRoom', function(roomNum, nickName, userList) {
+  	// console.log('userList', userList);
+  	roomId = roomNum;
   	location.hash = roomId;
+  	
   	$body.addClass('is-room');
   	addSystemMessage("<strong>" + nickName + "</strong> 님이 참여하였습니다.");
+  	setUserList(userList);
   });
+  
+  function setUserList(userList) {
+  	var users = [];
+  	$.each(userList, function(i, val) {
+  		users.push("<li>" + val + "</li>");
+  	});
+  	
+  	$('#user-list').html(users.join('\n'));
+  }
   
   // 로비로 이동
   $('#leave-room').click(function() {
+  	alert(roomId);
+  	
   	socket.emit('leaveRoom', roomId, nickName);
   	location.hash = '';
   	location.reload();
   });
   
-  socket.on('leaveRoom', function(nickName) {
+  socket.on('leaveRoom', function(nickName, userList) {
   	addSystemMessage("<strong>" + nickName + "</strong> 님이 나갔습니다.");
+  	setUserList(userList);
   });
   
   // 메시지 이벤트
   $('form').submit(function() {
   	var msg = $msgInput.val();
-    socket.emit('message', {
-    	nickName: nickName,
-    	body: msg
-    });
+  	
+  	if (msg.match('/')) {
+  		var receiverNickName = msg.split(" ")[0].replace('/', '');
+  		msg = msg.replace('/' + receiverNickName + ' ', '');
+  		
+  		socket.emit('message', {
+	    	nickName: nickName,
+	    	body: msg,
+	    	to: receiverNickName
+	    });
+  	} else {
+	    socket.emit('message', {
+	    	nickName: nickName,
+	    	body: msg,
+	    	to: 'all'
+	    });
+  	}
     $msgInput.val('');
     addUserMessage(nickName, msg, true);
     
@@ -112,5 +140,10 @@ $(function() {
   		$typing.removeClass('visible');
   	}, 3000);
   	*/
+  });
+  
+  // 귓속말 해당 유저 추가
+  $('#user-list').on('click', 'li', function() {
+  	$('#message').val('/' + $(this).text() + " ");
   });
 });

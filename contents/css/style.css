@@ -88,6 +88,14 @@ input[type="text"] { padding: 2px 5px; border: solid 1px #bbb; font-size: 1.3em;
 #chat-content .me { position: relative; }
 #chat-content .me .message { background-color: rgba(243, 178, 176, 0.3); }
 
+#user-list { 
+	position: absolute; padding: 10px 10px 10px 30px;
+	width: 100px; height: 200px; top: 10px; right: -141px; 
+	border: solid 1px #ccc; font-size: 14px;
+}
+#user-list li { cursor: pointer; }
+#user-list li:hover { text-decoration: underline; }
+
 /* typing */
 #typing-icon { 
 	position: absolute; bottom: 68px; right: 142px; height: 14px; line-height: 12px;

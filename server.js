@@ -15,32 +15,51 @@ app.get('/', function(req, res) {
 });
 
 // socket 
-io.on('connection', function(socket){
-  console.log('a user connected');
+/*
+ * io - 소켓 서버
+ * socket - 클라이언트와 연결된 소켓 
+ * io.sockets.in(roomId) - 타겟 룸에 전체 메시지 전달.
+ */ 
+var socketIds = [];
+io.on('connection', function(socket) {
   var roomId = null;
   
   // 룸접속
-  socket.on('joinRoom', function(room, nickName) {
-  	roomId = room;
+  socket.on('joinRoom', function(roomNum, nickName) {
+  	roomId = roomNum;
 	  socket.join(roomId);  	
-  	io.sockets.in(roomId).emit('joinRoom', roomId, nickName);
+	  
+  	// 유저 목록
+  	socketIds[nickName] = socket.id;
+  	io.sockets.in(roomId).emit('joinRoom', roomId, nickName, Object.keys(socketIds));
   	console.log('ROOM LIST', io.sockets.adapter.rooms);
   });
   
   // 룸퇴장
-  socket.on('leaveRoom', function(room, nickName) {
-  	socket.leave(roomId);
-  	socket.broadcast.to(roomId).emit('leaveRoom', nickName);
+  socket.on('leaveRoom', function(roomNum, nickName) {
+  	socket.leave(roomNum);
+  	delete socketIds[nickName];
+  	
+  	console.log('leaveRoom', roomNum, Object.keys(socketIds));
+  	socket.broadcast.to(roomNum).emit('leaveRoom', nickName, Object.keys(socketIds));
   });
   
   // 메시징
-  socket.on('message', function(msg) {
-    //console.log('message: ' + msg);
+  socket.on('message', function(data) {
+    //console.log('message: ' + data);
     
-    socket.broadcast.to(roomId).emit('message', msg); // 자신 제외 룸안의 유저
-    //socket.broadcast.emit('message', msg); 					// 자신 제외 메시지 전송  
-    //io.emit('message', msg); 							 					// 자신 포함 전체 룸 메시지 전송
-    //io.sockets.in(roomId).emit('message', msg); 		// 자신 포함 룸안의 유저
+    if (data.to == 'all') {
+	    socket.broadcast.to(roomId).emit('message', data); // 자신 제외 룸안의 유저
+    } else {
+    	var targetSocket = socketIds[data.to];
+    	
+    	if (targetSocket) {
+		 	 	io.sockets.in(targetSocket).emit('message', data);
+    	}
+    }
+    //socket.broadcast.emit('message', data); 					// 자신 제외 메시지 전송  
+    //io.emit('message', data); 							 					// 자신 포함 전체 룸 메시지 전송
+    //io.sockets.in(roomId).emit('message', data); 			// 자신 포함 룸안의 유저
   });
   
   // 타이핑
