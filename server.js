@@ -14,11 +14,19 @@ app.get('/', function(req, res) {
   });
 });
 
-// socket 
 /*
+ * socket.io 
+ * @REF - https://github.com/socketio/socket.io
+ * 
  * io - 소켓 서버
- * socket - 클라이언트와 연결된 소켓 
- * io.sockets.in(roomId) - 타겟 룸에 전체 메시지 전달.
+ * socket - 클라이언트와 연결된 하나의 소켓 
+ * io.sockets.in(roomId).emit() - 타겟 룸 소켓들 전체에 메시지 전달
+ * io.sockets.manager.rooms - 현재 생성되어 있는 모든 room 목록을 리턴
+ * 
+ * [Send methods]
+ * io.emit('message', data); 							 					// 자신 포함 전체룸 유저들에게 전송
+ * io.sockets.in(roomId).emit('message', data); 		// 자신 포함 해당룸에 유저들에게 전송
+ * socket.broadcast.emit('message', data); 					// 자신 제외 메시지 전송  
  */ 
 var socketIds = [];
 io.on('connection', function(socket) {
@@ -27,7 +35,7 @@ io.on('connection', function(socket) {
   // 룸접속
   socket.on('joinRoom', function(roomNum, nickName) {
   	roomId = roomNum;
-	  socket.join(roomId);  	
+	  socket.join(roomId);	// 소켓을 특정 room에 binding합니다.
 	  
   	// 유저 목록
   	socketIds[nickName] = socket.id;
@@ -39,8 +47,6 @@ io.on('connection', function(socket) {
   socket.on('leaveRoom', function(roomNum, nickName) {
   	socket.leave(roomNum);
   	delete socketIds[nickName];
-  	
-  	console.log('leaveRoom', roomNum, Object.keys(socketIds));
   	socket.broadcast.to(roomNum).emit('leaveRoom', nickName, Object.keys(socketIds));
   });
   
@@ -51,15 +57,13 @@ io.on('connection', function(socket) {
     if (data.to == 'all') {
 	    socket.broadcast.to(roomId).emit('message', data); // 자신 제외 룸안의 유저
     } else {
-    	var targetSocket = socketIds[data.to];
-    	
-    	if (targetSocket) {
-		 	 	io.sockets.in(targetSocket).emit('message', data);
+    	// 귓속말
+    	var targetSocketId = socketIds[data.to];
+    	if (targetSocketId) {
+		 	  //io.to(targetSocketId).emit('message', data);
+		 	  io.sockets.connected[targetSocketId].emit('message', data);
     	}
     }
-    //socket.broadcast.emit('message', data); 					// 자신 제외 메시지 전송  
-    //io.emit('message', data); 							 					// 자신 포함 전체 룸 메시지 전송
-    //io.sockets.in(roomId).emit('message', data); 			// 자신 포함 룸안의 유저
   });
   
   // 타이핑

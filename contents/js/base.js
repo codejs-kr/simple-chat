@@ -92,23 +92,19 @@ $(function() {
   // 메시지 이벤트
   $('form').submit(function() {
   	var msg = $msgInput.val();
+  	var receiverNickName = null;
   	
   	if (msg.match('/')) {
-  		var receiverNickName = msg.split(" ")[0].replace('/', '');
+  		receiverNickName = msg.split(" ")[0].replace('/', '');
   		msg = msg.replace('/' + receiverNickName + ' ', '');
-  		
-  		socket.emit('message', {
-	    	nickName: nickName,
-	    	body: msg,
-	    	to: receiverNickName
-	    });
-  	} else {
-	    socket.emit('message', {
-	    	nickName: nickName,
-	    	body: msg,
-	    	to: 'all'
-	    });
-  	}
+  	} 
+  	
+    socket.emit('message', {
+    	nickName: nickName,
+    	body: msg,
+    	to: receiverNickName || 'all'
+    });
+    
     $msgInput.val('');
     addUserMessage(nickName, msg, true);
     
