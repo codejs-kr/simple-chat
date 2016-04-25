@@ -6,7 +6,7 @@
  */
 $(function() {
   var socket = io();
-  var nickName = null; // /*prompt('닉네임을 입력해 주세요') ||*/ 'Guest-' + getRandomNum(1000);
+  var nickName = null; // 'Guest-' + getRandomNum(1000);
 	var roomId = '';
   var $body = $('body');
   var $roomName = $('#room-name');
@@ -44,6 +44,9 @@ $(function() {
   
   function setNickName(callback) {
   	nickName = prompt('닉네임을 입력해 주세요');
+  	if ($.trim(nickName) == '') {
+  		nickName = 'Guest-' + getRandomNum(999);
+  	}
   	callback && callback();
   }
   
