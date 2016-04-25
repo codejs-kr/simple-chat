@@ -6,27 +6,27 @@
  */
 $(function() {
   var socket = io();
-  var nickName = /*prompt('닉네임을 입력해 주세요') ||*/ 'Guest-' + getRandomNum(1000);
+  var nickName = null; // /*prompt('닉네임을 입력해 주세요') ||*/ 'Guest-' + getRandomNum(1000);
 	var roomId = '';
   var $body = $('body');
   var $roomName = $('#room-name');
   var $msgInput = $('#message');
   var $typing = $('#typing-icon');
+  var $callbacks;
   
   function getTime() {
 	  var time = new Date();
-  	// return time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
   	return time.getHours() + ":" + time.getMinutes();
   }
   
   function addUserMessage(nickName, msg, isMe) {
-  		$('#chat-content').append([
-	    	"<li class='" + (isMe ? 'me' : '') + "'>",
-	    		"<strong class='name'>" + (isMe ? 'Me' : nickName)  + "</strong>",
-	    		"<p class='message'>" + msg + 
-	    			"<span class='date'>" + getTime() + "</span>",
-	  			"</p>",
-	    	"</li>"
+		$('#chat-content').append([
+    	"<li class='" + (isMe ? 'me' : '') + "'>",
+    		"<strong class='name'>" + (isMe ? 'Me' : nickName)  + "</strong>",
+    		"<p class='message'>" + msg + 
+    			"<span class='date'>" + getTime() + "</span>",
+  			"</p>",
+    	"</li>"
     ].join('\n'));
   }
   
@@ -42,6 +42,11 @@ $(function() {
 		return Math.floor(Math.random() * max) + 1; // 1 ~ max
   }
   
+  function setNickName(callback) {
+  	nickName = prompt('닉네임을 입력해 주세요');
+  	callback && callback();
+  }
+  
   // 해시 체크
   if (location.hash.length >= 2) {
 		$roomName.val(location.hash.split('#')[1]);
@@ -49,11 +54,15 @@ $(function() {
   
   // 룸생성, 참여 이벤트
   $('#create-room').click(function() {
-	  socket.emit('joinRoom', getRandomNum(10000), nickName);
-  });  
+  	setNickName(function() {
+  		socket.emit('joinRoom', getRandomNum(10000), nickName);	
+  	});
+  });
   
   $('#join-room').click(function() {
-  	socket.emit('joinRoom', $roomName.val(), nickName);
+  	setNickName(function() {
+	  	socket.emit('joinRoom', $roomName.val(), nickName);
+  	});
   });
   
   socket.on('joinRoom', function(roomNum, nickName, userList) {
@@ -77,8 +86,6 @@ $(function() {
   
   // 로비로 이동
   $('#leave-room').click(function() {
-  	alert(roomId);
-  	
   	socket.emit('leaveRoom', roomId, nickName);
   	location.hash = '';
   	location.reload();
