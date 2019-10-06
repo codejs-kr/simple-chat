@@ -5,3 +5,6 @@ Simple chatting web application.
 * Room base
 * Secret message
 * Detecting typing 
+
+### TODO
+* React version
