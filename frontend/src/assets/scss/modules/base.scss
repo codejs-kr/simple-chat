@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+KR');
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  position: relative;
+  line-height: 1.6;
+  font-size: 1.6rem;
+  font-family: 'Noto Sans KR', 'Noto Sans', 'Malgun Gothic', sans-serif;
+  background: linear-gradient(130deg, #3068cc, #f00); // #6A92DA
+  color: #222;
+}
+
+.button-wrap {
+  text-align: center;
+}
