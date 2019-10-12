@@ -24,12 +24,20 @@ app.get('/', function(req, res) {
  * io.sockets.manager.rooms - 현재 생성되어 있는 모든 room 목록을 리턴
  * 
  * [Send methods]
- * io.emit('message', data); 							 					// 자신 포함 전체룸 유저들에게 전송
- * io.sockets.in(roomId).emit('message', data); 		// 자신 포함 해당룸에 유저들에게 전송
- * socket.broadcast.emit('message', data); 					// 자신 제외 메시지 전송  
+ * io.emit('message', data); 							 							// 자신 포함 전체룸 유저들에게 전송
+ * io.sockets.in(roomId).emit('message', data); 				// 자신 포함 해당룸 유저들에게 전송
+ * socket.broadcast.emit('message', data); 							// 자신 제외 전체에 메시지 전송  
+ * socket.broadcast.to(roomId).emit('message', data);  	// 자신 제외 해당룸 유저들에게 전송 
  */ 
 var socketIds = [];
 io.on('connection', function(socket) {
+	
+	// 소켓 연결해제
+  socket.on('disconnect', function() {
+    console.log('a user disconnected', socket
+    .id);
+  });
+  
   var roomId = null;
   
   // 룸접속
@@ -71,10 +79,7 @@ io.on('connection', function(socket) {
   	socket.broadcast.to(roomId).emit('typing', nickName);
   });
   
-  // 소켓 연결해제
-  socket.on('disconnect', function() {
-    console.log('a user disconnected');
-  });
+  
 });
 
 // server listen start
