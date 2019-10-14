@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div id="layout">
+        <div id="wrap">
           <Iphone>안녕하세요</Iphone>
         </div>
       </Fragment>
