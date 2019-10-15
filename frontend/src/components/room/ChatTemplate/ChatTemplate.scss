@@ -1,0 +1,16 @@
+#chat {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  > section {
+    &:nth-child(1) {
+      flex-basis: 90%;
+    }
+
+    &:nth-child(2) {
+      flex-basis: 10%;
+      border-top: solid 1px #dedede;
+    }
+  }
+}

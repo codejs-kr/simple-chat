@@ -1,0 +1,22 @@
+#header {
+  flex-basis: 8%;
+  background: #fff;
+  border-bottom: solid 1px #efefef;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+
+  > div {
+    width: 100%;
+  }
+
+  .h-center {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .h-right {
+    text-align: right;
+  }
+}

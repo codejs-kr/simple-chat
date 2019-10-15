@@ -1,6 +1,8 @@
 import React, { Component, Fragment, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Iphone from 'components/layout/Iphone';
+import Room from 'pages/Room';
+
 import utils from 'helpers/utils';
 import 'assets/scss/main.scss';
 
@@ -23,9 +25,11 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div id="wrap">
-          <Iphone>안녕하세요</Iphone>
-        </div>
+        <Iphone>
+          <div id="container">
+            <Room />
+          </div>
+        </Iphone>
       </Fragment>
     );
   }
