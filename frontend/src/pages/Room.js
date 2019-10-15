@@ -5,9 +5,9 @@ const Room = () => {
   return (
     <>
       <HeaderTemplate>
-        <div className="h-left">left</div>
+        <div className="h-left">나가기</div>
         <div className="h-center">Chat Name</div>
-        <div className="h-right">right</div>
+        <div className="h-right">Count</div>
       </HeaderTemplate>
       <ContentTemplate>
         <ChatTemplate>
