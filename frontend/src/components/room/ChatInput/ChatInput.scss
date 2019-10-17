@@ -1,0 +1,23 @@
+#chat-form {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+
+  textarea {
+    display: block;
+    padding: 5px 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 100%;
+    border: 0;
+    border-radius: 8px;
+    resize: none;
+    background: #f7f7f7;
+  }
+
+  button[type='submit'] {
+    padding: 2px;
+    border: 0;
+    background: #4c82ff;
+  }
+}
