@@ -4,6 +4,7 @@
   justify-content: space-between;
 
   textarea {
+    flex-basis: 85%;
     display: block;
     padding: 5px 8px;
     font-size: 15px;
@@ -16,6 +17,7 @@
   }
 
   button[type='submit'] {
+    flex-basis: 13%;
     padding: 2px;
     border: 0;
     background: #4c82ff;

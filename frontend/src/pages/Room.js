@@ -2,6 +2,8 @@ import React from 'react';
 import { HeaderTemplate, ContentTemplate, ChatTemplate } from 'components';
 import ChatInput from 'components/room/ChatInput';
 
+import ChatMessages from 'components/room/ChatMessages';
+
 const Room = () => {
   return (
     <>
@@ -12,7 +14,9 @@ const Room = () => {
       </HeaderTemplate>
       <ContentTemplate>
         <ChatTemplate>
-          <section>body</section>
+          <section>
+            <ChatMessages />
+          </section>
           <section>
             <ChatInput />
           </section>

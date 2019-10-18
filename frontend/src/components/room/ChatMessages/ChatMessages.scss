@@ -1,0 +1,25 @@
+#chat-messages {
+  padding: 8px;
+
+  li {
+    margin-bottom: 12px;
+
+    span {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      vertical-align: top;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    p {
+      display: inline-block;
+      padding: 6px 12px;
+      max-width: 70%;
+      background: #d6d6d6;
+      border-radius: 10px;
+    }
+  }
+}
