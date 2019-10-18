@@ -1,3 +1,6 @@
+@import '~assets/scss/modules/variables.scss';
+$margin-size: 10px;
+
 #chat-messages {
   padding: 8px;
 
@@ -8,7 +11,7 @@
       display: inline-block;
       width: 35px;
       height: 35px;
-      margin-right: 10px;
+      margin-right: $margin-size;
       vertical-align: top;
       border-radius: 50%;
       overflow: hidden;
@@ -18,8 +21,25 @@
       display: inline-block;
       padding: 6px 12px;
       max-width: 70%;
-      background: #d6d6d6;
+      background: $gray;
       border-radius: 10px;
+    }
+
+    &.mine {
+      display: flex;
+      justify-content: flex-end;
+
+      span {
+        order: 1;
+        margin-left: $margin-size;
+        margin-right: 0;
+      }
+
+      p {
+        order: 0;
+        background: $blue;
+        color: rgba(255, 255, 255, 0.9);
+      }
     }
   }
 }
