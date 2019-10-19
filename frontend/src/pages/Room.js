@@ -17,6 +17,7 @@ const Room = () => {
         <div className="h-center">Chat Name</div>
         <div className="h-right">
           <button type="button" id="btn-people">
+            <span className="count">7</span>
             <i className="material-icons">people</i>
           </button>
         </div>

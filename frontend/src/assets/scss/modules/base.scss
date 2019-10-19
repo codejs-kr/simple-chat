@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+KR');
 
-$bgColor: linear-gradient(130deg, #3068cc, #f00);
+$bg-color: #3068cc;
+// $bg-color: linear-gradient(130deg, #3068cc, #f00);
 
 html {
   font-size: 62.5%;
@@ -25,11 +26,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $bgColor; // #6A92DA
+  background: $bg-color; // #6A92DA
 }
 
 #page-container {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.iphone {
+  position: relative;
+  z-index: 2;
+}
+
+.bg-ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
 }
