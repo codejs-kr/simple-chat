@@ -1,44 +1,73 @@
 @import '~assets/scss/modules/variables.scss';
-$margin-size: 10px;
+@import '~assets/scss/modules/mixin.scss';
+$profile-margin-size: 12px;
 
 #chat-messages {
-  padding: 8px;
+  padding: 10px;
 
   li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: flex-start;
 
-    span {
+    .profile {
+      flex-basis: 14%;
+
       display: inline-block;
-      width: 35px;
-      height: 35px;
-      margin-right: $margin-size;
       vertical-align: top;
-      border-radius: 50%;
       overflow: hidden;
+
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
     }
 
-    p {
-      display: inline-block;
-      padding: 6px 12px;
-      max-width: 70%;
-      background: $gray;
-      border-radius: 10px;
+    .body {
+      flex-basis: 86%;
+      overflow: hidden;
+      font-size: 1.4rem;
+
+      span {
+        display: block;
+        margin-bottom: 5px;
+        line-height: 1;
+
+        @include ellipsis;
+      }
+
+      p {
+        display: inline-block;
+        padding: 6px 12px;
+        max-width: 90%;
+        background: $gray;
+        border-radius: 10px;
+        word-break: break-all;
+      }
     }
 
     &.mine {
       display: flex;
       justify-content: flex-end;
 
-      span {
+      .profile {
         order: 1;
-        margin-left: $margin-size;
-        margin-right: 0;
+
+        display: flex;
+        justify-content: flex-end;
       }
 
-      p {
+      .body {
         order: 0;
-        background: $blue;
-        color: rgba(255, 255, 255, 0.9);
+
+        display: flex;
+        justify-content: flex-end;
+
+        p {
+          background: $blue;
+          color: rgba(255, 255, 255, 0.9);
+        }
       }
     }
   }

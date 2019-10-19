@@ -1,7 +1,6 @@
 import React from 'react';
 import { HeaderTemplate, ContentTemplate, ChatTemplate } from 'components';
 import ChatInput from 'components/room/ChatInput';
-
 import ChatMessages from 'components/room/ChatMessages';
 
 const Room = () => {

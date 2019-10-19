@@ -1,10 +1,10 @@
 import React from 'react';
 import './ChatInput.scss';
 
-const ChatInput = () => {
+const ChatInput = ({ onSend }) => {
   return (
-    <form id="chat-form">
-      <textarea name="message" placeholder="Enter typing" />
+    <form id="chat-form" method="post" action="/message" onSubmit={onSend}>
+      <textarea name="message" placeholder="Type message" />
       <button type="submit">Send</button>
     </form>
   );
