@@ -1,3 +1,5 @@
+@import '~assets/scss/modules/variables';
+
 #header {
   flex-basis: 8%;
   background: #fff;
@@ -18,5 +20,22 @@
 
   .h-right {
     text-align: right;
+  }
+
+  button {
+    padding: 2px 0;
+    background: none;
+    border: 0;
+    min-width: 30px;
+    min-height: 30px;
+
+    i {
+      vertical-align: middle;
+    }
+
+    .active,
+    &:hover {
+      color: $blue;
+    }
   }
 }

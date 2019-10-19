@@ -26,9 +26,7 @@ class App extends Component {
     return (
       <Fragment>
         <Iphone>
-          <div id="container">
-            <Room />
-          </div>
+          <Room />
         </Iphone>
       </Fragment>
     );

@@ -1,3 +1,5 @@
+@import '~assets/scss/modules/variables';
+
 #chat-form {
   padding: 8px;
   display: flex;
@@ -20,6 +22,15 @@
     flex-basis: 13%;
     padding: 2px;
     border: 0;
-    background: #4c82ff;
+    color: $blue;
+    opacity: 0.5;
+
+    .material-icons {
+      font-size: 3rem;
+    }
+
+    .active {
+      opacity: 1;
+    }
   }
 }
