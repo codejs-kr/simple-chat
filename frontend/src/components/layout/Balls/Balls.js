@@ -15,8 +15,8 @@ const createBall = (count = 8) => {
   for (let i = 0; i < count; i++) {
     const top = getRandomNumber(POS_MIN, POS_MAX);
     const left = getRandomNumber(POS_MIN, POS_MAX);
-    const width = 120;
-    const height = getRandomNumber(105, 120);
+    const width = 140;
+    const height = getRandomNumber(120, 140);
     const style = { top: `${top}%`, left: `${left}%`, width: `${width}px`, height: `${height}px` };
 
     result.push(<span className="ball" style={style} />);
