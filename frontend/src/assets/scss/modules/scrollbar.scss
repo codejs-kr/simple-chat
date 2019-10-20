@@ -1,0 +1,39 @@
+/* 
+  Chrome, Safari용 스크롤 바
+  REF: http://webkit-scroll-gen.sourceforge.net 
+*/
+
+$size: 8px;
+
+::-webkit-scrollbar {
+  width: $size;
+  height: $size;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #808080;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6a6a6a;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #555555;
+}
+::-webkit-scrollbar-track {
+  background: #d4d4d4;
+  border: 0px none #ffffff;
+}
+::-webkit-scrollbar-track:hover {
+  background: #d4d4d4;
+}
+::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
