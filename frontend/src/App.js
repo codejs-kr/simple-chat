@@ -1,6 +1,7 @@
 import React, { Component, Fragment, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Iphone from 'components/layout/Iphone';
+import Balls from 'components/layout/Balls';
 import Room from 'pages/Room';
 
 import utils from 'helpers/utils';
@@ -22,34 +23,13 @@ class App extends Component {
     this.body.classList.add(utils.isMobile ? 'mobile' : 'pc');
   };
 
-  createBall = (count = 5) => {
-    const { getRandomNumber } = this;
-    let result = [];
-
-    for (let i = 0; i < count; i++) {
-      const top = getRandomNumber(0, 95);
-      const left = getRandomNumber(0, 95);
-      result.push(<span className="bg-ball" style={{ top: `${top}%`, left: `${left}%` }} />);
-    }
-
-    return result;
-  };
-
-  /**
-   * Returns a random number between min (inclusive) and max (exclusive)
-   */
-  getRandomNumber(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
   render() {
-    const { createBall } = this;
     return (
       <Fragment>
         <Iphone>
           <Room />
         </Iphone>
-        {createBall(8)}
+        <Balls />
       </Fragment>
     );
   }

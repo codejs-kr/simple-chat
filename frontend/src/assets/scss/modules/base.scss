@@ -27,6 +27,7 @@ body {
   align-items: center;
   justify-content: center;
   background: $bg-color; // #6A92DA
+  overflow: hidden;
 }
 
 #page-container {
@@ -38,15 +39,4 @@ body {
 .iphone {
   position: relative;
   z-index: 2;
-}
-
-.bg-ball {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
 }
