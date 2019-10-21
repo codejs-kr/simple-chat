@@ -5,7 +5,7 @@ class ChatInput extends Component {
   constructor(props) {
     super(props);
 
-    this.form = React.createRef();
+    this.textarea = React.createRef();
     this.state = {
       message: null,
     };
@@ -54,7 +54,15 @@ class ChatInput extends Component {
     if (message) {
       alert(message);
       // onSend()
+      this.handleReset();
     }
+  };
+
+  /**
+   * TEXTAREA 리셋
+   */
+  handleReset = () => {
+    this.textarea.current.value = '';
   };
 
   render() {
@@ -62,8 +70,14 @@ class ChatInput extends Component {
     const { handleSubmit, handleChange, handleKeyDown } = this;
 
     return (
-      <form id="chat-form" method="post" action="/message" onSubmit={handleSubmit} ref={this.form}>
-        <textarea name="message" placeholder="Type message" onChange={handleChange} onKeyDown={handleKeyDown} />
+      <form id="chat-form" method="post" action="/message" onSubmit={handleSubmit}>
+        <textarea
+          name="message"
+          placeholder="Type message"
+          ref={this.textarea}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
         <button type="submit" className={message ? 'active' : ''}>
           <i className="material-icons">send</i>
         </button>
