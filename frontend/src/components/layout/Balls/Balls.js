@@ -9,7 +9,7 @@ const Balls = () => {
 const createBall = (count = 8) => {
   const { getRandomNumber } = utils;
   const POS_MIN = -5;
-  const POS_MAX = 95;
+  const POS_MAX = 90;
   let result = [];
 
   for (let i = 0; i < count; i++) {
