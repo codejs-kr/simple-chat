@@ -1,37 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import './ChatInput.scss';
 
-class ChatInput extends Component {
-  constructor(props) {
-    super(props);
-
-    this.textarea = React.createRef();
-    this.state = {
-      message: null,
-    };
-  }
+const ChatInput = () => {
+  const textareaEl = useRef(null);
+  const [message, setMessage] = useState(null);
 
   /**
    * TEXTAREA 이벤트 핸들링
    */
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const message = e.target.value.trim();
-
-    this.setState({
-      message,
-    });
+    setMessage(message);
   };
 
   /**
    * 키보드 이벤트 핸들링
    */
-  handleKeyDown = (e) => {
+  const handleKeyDown = (e) => {
     // console.log('handleKeyDown', e);
     const ENTER = e.key === 'Enter';
     const SHIFT = e.shiftKey;
 
     if (ENTER && !SHIFT) {
-      this.handleSend();
+      handleSend();
       e.preventDefault();
     }
   };
@@ -39,51 +30,45 @@ class ChatInput extends Component {
   /**
    * 폼 이벤트 핸들링
    */
-  handleSubmit = (e) => {
-    this.handleSend();
+  const handleSubmit = (e) => {
+    handleSend();
     e.preventDefault();
   };
 
   /**
    * 전송 처리
    */
-  handleSend = () => {
-    const { onSend } = this.props;
-    const { message } = this.state;
+  const handleSend = () => {
+    // const { onSend } = this.props;
+    // onSend()
 
     if (message) {
       alert(message);
-      // onSend()
-      this.handleReset();
+      handleReset();
     }
   };
 
   /**
    * TEXTAREA 리셋
    */
-  handleReset = () => {
-    this.textarea.current.value = '';
+  const handleReset = () => {
+    textareaEl.current.value = '';
   };
 
-  render() {
-    const { message } = this.state;
-    const { handleSubmit, handleChange, handleKeyDown } = this;
-
-    return (
-      <form id="chat-form" method="post" action="/message" onSubmit={handleSubmit}>
-        <textarea
-          name="message"
-          placeholder="Type message"
-          ref={this.textarea}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-        />
-        <button type="submit" className={message ? 'active' : ''}>
-          <i className="material-icons">send</i>
-        </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form id="chat-form" method="post" action="/message" onSubmit={handleSubmit}>
+      <textarea
+        name="message"
+        placeholder="Type message"
+        ref={textareaEl}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
+      <button type="submit" className={message ? 'active' : ''}>
+        <i className="material-icons">send</i>
+      </button>
+    </form>
+  );
+};
 
 export default ChatInput;
