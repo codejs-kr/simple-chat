@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <RoomTemplate>
       <HeaderTemplate>
-        <div className="h-center">Home</div>
+        <div className="h-center">Simple Chatting</div>
       </HeaderTemplate>
       <ContentTemplate>
         <Link to="/room/apple">Room</Link>
