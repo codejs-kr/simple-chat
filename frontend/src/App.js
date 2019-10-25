@@ -1,5 +1,5 @@
 import React, { Component, Fragment, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Iphone from 'components/layout/Iphone';
 import Balls from 'components/layout/Balls';
 import Home from 'pages/Home';
@@ -46,12 +46,14 @@ class App extends Component {
 }
 
 // export default App;
-export default connect(
-  ({ count }) => ({
-    count,
-  }),
-  ({ count: { increment, incrementAsync } }) => ({
-    increment: () => increment(1),
-    incrementAsync: () => incrementAsync(1),
-  })
-)(App);
+export default withRouter(
+  connect(
+    ({ count }) => ({
+      count,
+    }),
+    ({ count: { increment, incrementAsync } }) => ({
+      increment: () => increment(1),
+      incrementAsync: () => incrementAsync(1),
+    })
+  )(App)
+);
