@@ -60,6 +60,7 @@ const ChatInput = () => {
       <textarea
         name="message"
         placeholder="Type message"
+        maxLength="200"
         ref={textareaEl}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
