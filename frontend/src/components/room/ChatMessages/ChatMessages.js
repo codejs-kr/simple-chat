@@ -1,33 +1,32 @@
 import React from 'react';
 import './ChatMessages.scss';
 
-const ChatMessages = () => {
+const ChatMessages = ({ myInfo, messages }) => {
   return (
     <ul id="chat-messages">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((data, i) => {
-        console.log(data, i);
+      {messages.map((data, i) => {
+        // console.log(data, i);
+        const isMine = myInfo.id === data.id;
 
-        return <Message key={i} data={data} />;
+        return <Message key={i} isMine={isMine} data={data} />;
       })}
     </ul>
   );
 };
 
-const Message = ({ data }) => {
-  const isMine = data > 8;
+const Message = ({ isMine, data }) => {
   const className = isMine ? 'mine' : 'attendee';
+  const defaultProfileImage = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
+  const { profileImage, nickname, message, time } = data;
 
   return (
-    <li className={className}>
+    <li className={className} data-time={time}>
       <div className="profile">
-        <img
-          src="https://lh3.googleusercontent.com/-NWx_E8i2cEE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcyW9Y7YloaN8IvNg58Y_ewM2DRKw.CMID/s32-c/photo.jpg"
-          alt="profile"
-        />
+        <img src={profileImage || defaultProfileImage} alt="profile" />
       </div>
       <div className="body">
-        {!isMine && <span title="Name">Name</span>}
-        <p>Message</p>
+        {!isMine && <span title={nickname}>{nickname}</span>}
+        <p>{message}</p>
       </div>
     </li>
   );

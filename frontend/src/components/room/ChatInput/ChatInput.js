@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './ChatInput.scss';
 
-const ChatInput = () => {
+const ChatInput = ({ onSend }) => {
   const textareaEl = useRef(null);
   const [message, setMessage] = useState(null);
 
@@ -9,6 +9,8 @@ const ChatInput = () => {
    * TEXTAREA 이벤트 핸들링
    */
   const handleChange = (e) => {
+    console.log('handleChange', e);
+
     const message = e.target.value.trim();
     setMessage(message);
   };
@@ -22,8 +24,8 @@ const ChatInput = () => {
     const SHIFT = e.shiftKey;
 
     if (ENTER && !SHIFT) {
-      handleSend();
       e.preventDefault();
+      handleSend();
     }
   };
 
@@ -31,19 +33,16 @@ const ChatInput = () => {
    * 폼 이벤트 핸들링
    */
   const handleSubmit = (e) => {
-    handleSend();
     e.preventDefault();
+    handleSend();
   };
 
   /**
    * 전송 처리
    */
   const handleSend = () => {
-    // const { onSend } = this.props;
-    // onSend()
-
     if (message) {
-      alert(message);
+      onSend(message);
       handleReset();
     }
   };
