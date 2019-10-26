@@ -9,7 +9,7 @@ const ChatInput = ({ onSend }) => {
    * TEXTAREA 이벤트 핸들링
    */
   const handleChange = (e) => {
-    console.log('handleChange', e);
+    // console.log('handleChange', e);
 
     const message = e.target.value.trim();
     setMessage(message);
