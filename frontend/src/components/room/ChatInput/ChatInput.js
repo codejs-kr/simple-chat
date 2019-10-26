@@ -52,6 +52,7 @@ const ChatInput = ({ onSend }) => {
    */
   const handleReset = () => {
     textareaEl.current.value = '';
+    setMessage(null);
   };
 
   return (
