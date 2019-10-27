@@ -1,11 +1,9 @@
 import produce from 'immer';
+import utils from 'helpers/utils';
 
-const delay = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
-
-export const chat = {
+export default {
   // initial state
   state: {
-    count: 0,
     nickname: '짱구발가락',
     roomName: '공개채팅방',
     myInfo: {
@@ -57,11 +55,6 @@ export const chat = {
   },
   reducers: {
     // handle state changes with pure functions
-    increment(state, payload) {
-      return produce(state, (draft) => {
-        draft.count = state.count + payload;
-      });
-    },
     add(state, payload) {
       return produce(state, (draft) => {
         draft.messages.push(payload);
@@ -71,16 +64,11 @@ export const chat = {
   effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-    async incrementAsync(payload, rootState) {
-      console.log('incrementAsync', payload, rootState);
-      await delay(1000);
-      dispatch.chat.increment(payload);
-    },
 
     async send(payload, rootState) {
       console.log('send', payload, rootState);
       const { chat } = rootState;
-      await delay(100);
+      await utils.delay(100);
 
       // socket send
       dispatch.chat.add({
@@ -91,7 +79,7 @@ export const chat = {
 
     async leave(payload, rootState) {
       console.log('leave', payload, rootState);
-      await delay(1000);
+      await utils.delay(1000);
       // socket leave
     },
   }),

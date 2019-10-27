@@ -48,10 +48,10 @@ class App extends Component {
 // export default App;
 export default withRouter(
   connect(
-    ({ chat }) => ({
-      count: chat.count,
+    ({ base }) => ({
+      count: base.count,
     }),
-    ({ chat: { increment, incrementAsync } }) => ({
+    ({ base: { increment, incrementAsync } }) => ({
       increment: () => increment(1),
       incrementAsync: () => incrementAsync(1),
     })
