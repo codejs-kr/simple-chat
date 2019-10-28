@@ -1,14 +1,14 @@
 import React from 'react';
-import RoomTemplate from 'components/room/RoomTemplate';
+import PageTemplate from 'components/layout/PageTemplate';
 import RoomHeaderContainer from 'containers/RoomHeaderContainer';
 import RoomContentContainer from 'containers/RoomContentContainer';
 
 const Room = () => {
   return (
-    <RoomTemplate>
+    <PageTemplate name="room">
       <RoomHeaderContainer />
       <RoomContentContainer />
-    </RoomTemplate>
+    </PageTemplate>
   );
 };
 

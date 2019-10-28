@@ -1,0 +1,25 @@
+#page-container[data-page='home'] {
+  #content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#page-container[data-page='room'] {
+  #btn-leave {
+    .material-icons {
+      font-size: 30px;
+    }
+  }
+
+  #btn-people {
+    .count {
+      display: inline-block;
+      margin-right: 4px;
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+  }
+}

@@ -1,19 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { HeaderTemplate, ContentTemplate } from 'components';
-
-import RoomTemplate from 'components/room/RoomTemplate';
+import { HeaderTemplate } from 'components';
+import PageTemplate from 'components/layout/PageTemplate';
+import HomeContentContainer from 'containers/HomeContentContainer';
 
 const Home = () => {
   return (
-    <RoomTemplate>
+    <PageTemplate name="home">
       <HeaderTemplate>
-        <div className="h-center">Simple Chatting</div>
+        <div className="h-center">Simple Chat</div>
       </HeaderTemplate>
-      <ContentTemplate>
-        <Link to="/room/apple">Room</Link>
-      </ContentTemplate>
-    </RoomTemplate>
+      <HomeContentContainer />
+    </PageTemplate>
   );
 };
 

@@ -4,15 +4,7 @@ import utils from 'helpers/utils';
 export default {
   // initial state
   state: {
-    nickname: '짱구발가락',
     roomName: '공개채팅방',
-    myInfo: {
-      id: 'user1',
-      nickname: '짱구',
-      profileImage:
-        'https://lh3.googleusercontent.com/-NWx_E8i2cEE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcyW9Y7YloaN8IvNg58Y_ewM2DRKw.CMID/s32-c/photo.jpg',
-      participatingTime: 1572010340059,
-    },
     users: [
       {
         id: 'user1',
@@ -55,7 +47,25 @@ export default {
   },
   reducers: {
     // handle state changes with pure functions
-    add(state, payload) {
+    updateRoomName(state, payload) {
+      return produce(state, (draft) => {
+        draft.roomName = payload;
+      });
+    },
+
+    addUser(state, payload) {
+      return produce(state, (draft) => {
+        draft.users.push(payload);
+      });
+    },
+
+    removeUser(state, payload) {
+      return produce(state, (draft) => {
+        draft.users.push(payload);
+      });
+    },
+
+    addMessage(state, payload) {
       return produce(state, (draft) => {
         draft.messages.push(payload);
       });
@@ -64,15 +74,15 @@ export default {
   effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-
     async send(payload, rootState) {
       console.log('send', payload, rootState);
-      const { chat } = rootState;
+      const { base } = rootState;
+      const { addMessage } = dispatch.room;
       await utils.delay(100);
 
       // socket send
-      dispatch.chat.add({
-        ...chat.myInfo,
+      addMessage({
+        ...base.myInfo,
         message: payload,
       });
     },

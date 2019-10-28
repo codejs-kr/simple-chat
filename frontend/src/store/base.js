@@ -15,9 +15,12 @@ export default {
   },
   reducers: {
     // handle state changes with pure functions
-    increment(state, payload) {
+    updateMyInfo(state, payload) {
       return produce(state, (draft) => {
-        draft.count = state.count + payload;
+        return {
+          ...draft.myInfo,
+          ...payload,
+        };
       });
     },
   },

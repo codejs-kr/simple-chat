@@ -35,9 +35,9 @@ class RoomHeaderContainer extends Component {
 }
 
 export default connect(
-  ({ chat }) => ({
-    users: chat.users,
-    roomName: chat.roomName,
+  ({ room }) => ({
+    users: room.users,
+    roomName: room.roomName,
   }),
   () => {}
 )(RoomHeaderContainer);

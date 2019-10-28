@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ContentTemplate, ChatTemplate } from 'components';
+import { ContentTemplate } from 'components';
+import ChatTemplate from 'components/room/ChatTemplate';
 import ChatInput from 'components/room/ChatInput';
 import ChatMessages from 'components/room/ChatMessages';
 
@@ -19,6 +20,7 @@ class RoomContentContainer extends Component {
 
   scrollTop = () => {
     const targetEl = document.querySelector('#chat section');
+
     return (targetEl.scrollTop = targetEl.scrollHeight);
   };
 
@@ -41,11 +43,11 @@ class RoomContentContainer extends Component {
 }
 
 export default connect(
-  ({ chat }) => ({
-    myInfo: chat.myInfo,
-    messages: chat.messages,
+  ({ base, room }) => ({
+    myInfo: base.myInfo,
+    messages: room.messages,
   }),
-  ({ chat: { send } }) => ({
+  ({ room: { send } }) => ({
     send,
   })
 )(RoomContentContainer);
