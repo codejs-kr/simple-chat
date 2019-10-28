@@ -1,5 +1,5 @@
-# Nodejs Socket.io - Simple Chatting
-Simple chatting web application.
+# Nodejs Socket.io - Simple Chat
+Simple chat web application.
 
 ### Feature (Now Developing)
 * Room base
