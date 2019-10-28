@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ContentTemplate } from 'components';
-import ChatTemplate from 'components/room/ChatTemplate';
+import { ContentTemplate } from 'components/layout';
+import ChatWrap from 'components/room/ChatWrap';
 import ChatInput from 'components/room/ChatInput';
 import ChatMessages from 'components/room/ChatMessages';
 
@@ -29,14 +29,14 @@ class RoomContentContainer extends Component {
 
     return (
       <ContentTemplate>
-        <ChatTemplate>
+        <ChatWrap>
           <section>
             <ChatMessages myInfo={myInfo} messages={messages} />
           </section>
           <section>
             <ChatInput onSend={send} />
           </section>
-        </ChatTemplate>
+        </ChatWrap>
       </ContentTemplate>
     );
   }

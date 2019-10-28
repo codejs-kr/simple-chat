@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ContentTemplate } from 'components';
+import { ContentTemplate } from 'components/layout';
 import Profile from 'components/home/Profile';
 
 class HomeContentContainer extends Component {
@@ -15,9 +15,11 @@ class HomeContentContainer extends Component {
     return (
       <ContentTemplate>
         <Profile myInfo={myInfo} />
-        <button type="button">오픈채팅입장</button>
 
-        <Link to="/room/apple">Room</Link>
+        <div id="button-wrap">
+          <button type="button">오픈채팅입장</button>
+          <Link to="/room/apple">Room</Link>
+        </div>
       </ContentTemplate>
     );
   }

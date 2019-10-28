@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HeaderTemplate } from 'components';
+import { HeaderTemplate } from 'components/layout';
 
 class RoomHeaderContainer extends Component {
   constructor(props) {

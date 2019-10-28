@@ -1,6 +1,5 @@
 import React from 'react';
-import { HeaderTemplate } from 'components';
-import PageTemplate from 'components/layout/PageTemplate';
+import { HeaderTemplate, PageTemplate } from 'components/layout';
 import HomeContentContainer from 'containers/HomeContentContainer';
 
 const Home = () => {

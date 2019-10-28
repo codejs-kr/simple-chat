@@ -1,7 +1,6 @@
 import React, { Component, Fragment, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Iphone from 'components/layout/Iphone';
-import Balls from 'components/layout/Balls';
+import { Iphone, Balls } from 'components/layout';
 import Home from 'pages/Home';
 import Room from 'pages/Room';
 import utils from 'helpers/utils';

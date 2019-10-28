@@ -1,9 +1,13 @@
 #page-container[data-page='home'] {
   #content {
+    padding: 50px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+  }
+
+  #button-wrap {
   }
 }
 

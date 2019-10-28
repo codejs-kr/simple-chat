@@ -2,7 +2,17 @@
   $size: 80px;
 
   img {
+    display: inline-block;
+    margin-bottom: 10px;
     width: $size;
     height: $size;
+    border-radius: 50%;
+  }
+
+  input {
+    padding: 5px;
+    font-size: 16px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    text-align: center;
   }
 }
