@@ -17,8 +17,9 @@ class HomeContentContainer extends Component {
         <Profile myInfo={myInfo} />
 
         <div id="button-wrap">
-          <button type="button">오픈채팅입장</button>
-          <Link to="/room/apple">Room</Link>
+          <Link to="/room/public">
+            <button type="button">오픈채팅입장</button>
+          </Link>
         </div>
       </ContentTemplate>
     );
