@@ -10,7 +10,7 @@ const Profile = ({ myInfo }) => {
         <img src={profileImage} alt="profile" />
       </section>
       <section id="nickname-wrap">
-        <input type="text" defaultValue={nickname} maxLength="15" placeholder="Enter nickname" />
+        <input type="text" className="input" defaultValue={nickname} maxLength="15" placeholder="Enter nickname" />
       </section>
     </div>
   );

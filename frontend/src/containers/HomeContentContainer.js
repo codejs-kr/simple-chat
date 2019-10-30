@@ -18,7 +18,9 @@ class HomeContentContainer extends Component {
 
         <div id="button-wrap">
           <Link to="/room/public">
-            <button type="button">오픈채팅입장</button>
+            <button type="button" className="btn">
+              오픈채팅입장
+            </button>
           </Link>
         </div>
       </ContentTemplate>

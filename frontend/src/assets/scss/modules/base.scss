@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+KR');
+@import './variables.scss';
 
 $bg-color: #3068cc;
 // $bg-color: linear-gradient(130deg, #3068cc, #f00);
@@ -9,10 +10,10 @@ html {
 
 body {
   line-height: 1.6;
-  font-size: 1.6rem;
+  font-size: $font-size-default;
   font-family: 'Noto Sans KR', 'Noto Sans', 'Malgun Gothic', sans-serif;
-  color: #222;
-  background: #222;
+  color: $black;
+  background: $black;
 }
 
 .button-wrap {
