@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { HeaderTemplate } from 'components/layout';
 
 class RoomHeaderContainer extends Component {
@@ -11,6 +12,13 @@ class RoomHeaderContainer extends Component {
     };
   }
 
+  handleExit = () => {
+    console.log('handleExit', this.props);
+    const { location, history } = this.props;
+
+    history.goBack();
+  };
+
   render() {
     const { users, roomName } = this.props;
     const userCount = users.length;
@@ -18,7 +26,7 @@ class RoomHeaderContainer extends Component {
     return (
       <HeaderTemplate>
         <div className="h-left">
-          <button type="button" id="btn-leave">
+          <button type="button" id="btn-exit" onClick={this.handleExit}>
             <i className="material-icons">chevron_left</i>
           </button>
         </div>
@@ -34,10 +42,12 @@ class RoomHeaderContainer extends Component {
   }
 }
 
-export default connect(
-  ({ room }) => ({
-    users: room.users,
-    roomName: room.roomName,
-  }),
-  () => {}
-)(RoomHeaderContainer);
+export default withRouter(
+  connect(
+    ({ room }) => ({
+      users: room.users,
+      roomName: room.roomName,
+    }),
+    () => ({})
+  )(RoomHeaderContainer)
+);
