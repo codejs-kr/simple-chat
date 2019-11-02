@@ -1,9 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './ChatInput.scss';
 
 const ChatInput = ({ onSend }) => {
   const textareaEl = useRef(null);
   const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    console.log('렌더링이 완료되었습니다!', message);
+  }, [message]);
 
   /**
    * TEXTAREA 이벤트 핸들링
@@ -19,7 +23,7 @@ const ChatInput = ({ onSend }) => {
    * 키보드 이벤트 핸들링
    */
   const handleKeyDown = (e) => {
-    // console.log('handleKeyDown', e);
+    console.log('handleKeyDown', e);
     const ENTER = e.key === 'Enter';
     const SHIFT = e.shiftKey;
 
@@ -33,6 +37,7 @@ const ChatInput = ({ onSend }) => {
    * 폼 이벤트 핸들링
    */
   const handleSubmit = (e) => {
+    console.log('handleSubmit', e);
     e.preventDefault();
     handleSend();
   };
@@ -43,8 +48,8 @@ const ChatInput = ({ onSend }) => {
   const handleSend = () => {
     if (message) {
       onSend(message);
-      handleReset();
     }
+    handleReset();
   };
 
   /**
@@ -63,7 +68,7 @@ const ChatInput = ({ onSend }) => {
         maxLength="200"
         ref={textareaEl}
         onChange={handleChange}
-        onKeyDown={handleKeyDown}
+        onKeyPress={handleKeyDown}
       />
       <button type="submit" className={message ? 'active' : ''}>
         <i className="material-icons">send</i>
