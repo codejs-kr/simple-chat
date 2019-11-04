@@ -42,6 +42,7 @@ module.exports = (http) => {
     socket.on('message', (data) => {
       //console.log('message: ' + data);
 
+      // 룸 전체전송
       if (data.to == 'all') {
         socket.broadcast.to(roomId).emit('message', data); // 자신 제외 룸안의 유저
       } else {
