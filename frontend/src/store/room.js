@@ -3,7 +3,7 @@ import utils from 'helpers/utils';
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:9090');
-socket.emit('joinRoom', 123123, '짱구');
+socket.emit('join', 123123, '짱구');
 
 export default {
   // initial state

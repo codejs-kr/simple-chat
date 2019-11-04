@@ -14,7 +14,7 @@
     "node": "^10.16.0"
   },
   "scripts": {
-    "start": "node server",
-    "start:dev": "nodemon --watch ./server.js"
+    "start": "node app",
+    "start:dev": "nodemon --watch ./app.js"
   }
 }
