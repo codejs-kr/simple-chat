@@ -1,6 +1,6 @@
 {
   "author": "dodortus",
-  "name": "simple-chatting",
+  "name": "simple-chat-client",
   "version": "0.8.1",
   "description": "Simple Web chatting",
   "dependencies": {

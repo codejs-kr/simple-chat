@@ -1,6 +1,4 @@
 {
-  "webserver": {
-    "host": "localhost",
-    "port": 2016
-  }
+  "host": "localhost",
+  "port": 9090
 }

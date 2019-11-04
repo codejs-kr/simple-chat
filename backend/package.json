@@ -1,14 +1,20 @@
 {
   "author": "dodortus",
-  "name": "simple-chatting",
-  "version": "0.0.1",
-  "description": "nodejs simple chatting.",
+  "name": "simple-chat-server",
+  "version": "0.8.1",
+  "description": "Simple Web chatting",
   "dependencies": {
-    "express": "4.13.4",
-    "ejs": "2.4.1",
-    "socket.io": "1.4.5"
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   },
   "engine": {
-    "node": "10.16.0"
+    "node": "^10.16.0"
+  },
+  "scripts": {
+    "start": "node server",
+    "start:dev": "nodemon --watch ./server.js"
   }
 }
