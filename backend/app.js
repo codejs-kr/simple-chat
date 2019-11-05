@@ -14,7 +14,7 @@ require('./controllers/socket.js')(http);
 //   });
 // });
 
-// server listen start
+// server start
 http.listen(config.port, () => {
   console.log('simple chat server running at ' + config.host + ':' + config.port);
 });

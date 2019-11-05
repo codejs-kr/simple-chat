@@ -4,7 +4,6 @@ import utils from 'helpers/utils';
 export default {
   // initial state
   state: {
-    count: 0,
     myInfo: {
       id: 'user1',
       nickname: '짱구',

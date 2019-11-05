@@ -3,7 +3,23 @@ import utils from 'helpers/utils';
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:9090');
+socket.on('join', (roomId, nickname, nicks) => {
+  console.log('onjoin', roomId, nickname, nicks);
+});
+
+socket.on('message', (data) => {
+  console.log('onmessage', data);
+});
+
 socket.emit('join', 123123, '짱구');
+socket.emit('message', {
+  to: 'all',
+  body: '안녕하세요옷?',
+});
+// socket join
+// socket leave
+// socket message, typing
+// socket disconnect
 
 export default {
   // initial state
