@@ -20,9 +20,9 @@ module.exports = {
     alias: {
       components: srcPath + '/components',
       containers: srcPath + '/containers',
-      pages: srcPath + '/pages',
-      helpers: srcPath + '/helpers',
+      modules: srcPath + '/modules',
       assets: srcPath + '/assets',
+      pages: srcPath + '/pages',
     },
   },
 
