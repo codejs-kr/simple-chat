@@ -15,6 +15,6 @@
   },
   "scripts": {
     "start": "node app",
-    "start:dev": "nodemon --watch ./app.js"
+    "start:dev": "nodemon --watch ./app.js --watch ./controllers"
   }
 }
