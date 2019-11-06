@@ -4,19 +4,44 @@ import { ContentTemplate } from 'components/layout';
 import ChatWrap from 'components/room/ChatWrap';
 import ChatInput from 'components/room/ChatInput';
 import ChatMessages from 'components/room/ChatMessages';
+import socket from 'modules/socket';
 
 class RoomContentContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      openedUserList: false,
-    };
+    this.state = {};
+    this.bindSocketEvents();
+    this.join();
   }
 
   componentDidUpdate() {
     this.scrollTop();
   }
+
+  bindSocketEvents = () => {
+    const { addMessage } = this.props;
+
+    socket.on('join', (data) => {
+      console.log('join', data);
+    });
+
+    socket.on('leave', (data) => {
+      console.log('leave', data);
+    });
+
+    socket.on('message', (data) => {
+      console.log('message', data);
+      addMessage(data);
+    });
+  };
+
+  join = () => {
+    const { roomName, myInfo } = this.props;
+    const encodedRoomName = encodeURIComponent(roomName);
+
+    socket.emit('join', encodedRoomName, myInfo);
+  };
 
   scrollTop = () => {
     const targetEl = document.querySelector('#chat section');
@@ -45,9 +70,11 @@ class RoomContentContainer extends Component {
 export default connect(
   ({ base, room }) => ({
     myInfo: base.myInfo,
+    roomName: room.name,
     messages: room.messages,
   }),
-  ({ room: { send } }) => ({
+  ({ room: { send, addMessage } }) => ({
     send,
+    addMessage,
   })
 )(RoomContentContainer);

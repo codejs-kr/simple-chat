@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Iphone, Balls } from 'components/layout';
 import Home from 'pages/Home';
 import Room from 'pages/Room';
-import utils from 'helpers/utils';
+import utils from 'modules/utils';
 import 'assets/scss/main.scss';
 
 class App extends Component {

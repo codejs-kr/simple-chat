@@ -1,21 +1,7 @@
 import produce from 'immer';
-import utils from 'helpers/utils';
-import io from 'socket.io-client';
+import utils from 'modules/utils';
+import socket from 'modules/socket';
 
-const socket = io('http://localhost:9090');
-socket.on('join', (roomId, nickname, nicks) => {
-  console.log('onjoin', roomId, nickname, nicks);
-});
-
-socket.on('message', (data) => {
-  console.log('onmessage', data);
-});
-
-socket.emit('join', 123123, '짱구');
-socket.emit('message', {
-  to: 'all',
-  body: '안녕하세요옷?',
-});
 // socket join
 // socket leave
 // socket message, typing
@@ -24,13 +10,12 @@ socket.emit('message', {
 export default {
   // initial state
   state: {
-    roomName: '공개채팅방',
+    name: '공개채팅방',
     users: [
       {
         id: 'user1',
         nickname: '짱구',
-        profileImage:
-          'https://lh3.googleusercontent.com/-NWx_E8i2cEE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcyW9Y7YloaN8IvNg58Y_ewM2DRKw.CMID/s32-c/photo.jpg',
+        profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
         participatingTime: 1572010340059,
       },
       {
@@ -44,8 +29,7 @@ export default {
       {
         id: 'user1',
         nickname: '짱구', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
-        profileImage:
-          'https://lh3.googleusercontent.com/-NWx_E8i2cEE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcyW9Y7YloaN8IvNg58Y_ewM2DRKw.CMID/s32-c/photo.jpg',
+        profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
         message: '안녕하세요',
         time: 1572010340059,
       },
@@ -53,14 +37,7 @@ export default {
         id: 'user2',
         nickname: '짱구엄마', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
         profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1661/menu/2/html/f131611716040131952(0).jpg',
-        message: '안녕하세요1',
-        time: 1572010340059,
-      },
-      {
-        id: 'user2',
-        nickname: '짱구엄마', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
-        profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1661/menu/2/html/f131611716040131952(0).jpg',
-        message: '안녕하세요2',
+        message: 'hi~',
         time: 1572010340059,
       },
     ],
@@ -69,7 +46,7 @@ export default {
     // handle state changes with pure functions
     updateRoomName(state, payload) {
       return produce(state, (draft) => {
-        draft.roomName = payload;
+        draft.name = payload;
       });
     },
 
@@ -87,7 +64,7 @@ export default {
 
     addMessage(state, payload) {
       return produce(state, (draft) => {
-        draft.messages.push(payload);
+        draft.messages.push(payload.userMessage);
       });
     },
   },
@@ -95,16 +72,23 @@ export default {
     // handle state changes with impure functions.
     // use async/await for async actions
     async send(payload, rootState) {
-      console.log('send', payload, rootState);
       const { base } = rootState;
       const { addMessage } = dispatch.room;
-      await utils.delay(100);
+      const data = {
+        to: 'all',
+        userMessage: {
+          ...base.myInfo,
+          message: payload,
+        },
+      };
 
-      // socket send
-      addMessage({
-        ...base.myInfo,
-        message: payload,
-      });
+      console.log('send', data, rootState);
+
+      // send message
+      await socket.emit('message', data);
+
+      // add message
+      addMessage(data);
     },
 
     async leave(payload, rootState) {

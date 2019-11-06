@@ -18,33 +18,42 @@ module.exports = (http) => {
   let socketIdArray = [];
 
   io.on('connection', (socket) => {
-    let roomId = null;
+    let instanceRoomId = null;
 
     // 룸접속
-    socket.on('join', (roomNum, nickName) => {
-      roomId = roomNum;
+    socket.on('join', (roomId, userInfo) => {
+      instanceRoomId = roomId;
       socket.join(roomId); // 소켓을 특정 room에 binding합니다.
 
       // 유저 목록
-      socketIdArray[nickName] = socket.id;
-      io.sockets.in(roomId).emit('join', roomId, nickName, Object.keys(socketIdArray));
-      console.log('ROOM LIST', io.sockets.adapter.rooms);
+      socketIdArray[userInfo.id] = socket.id;
+      io.sockets.in(roomId).emit('join', {
+        userInfo,
+        attendee: Object.keys(socketIdArray),
+      });
+
+      console.log('ROOM JOIN', instanceRoomId);
+      // console.log('ROOM LIST', io.sockets.adapter.rooms);
     });
 
     // 룸퇴장
-    socket.on('leave', (roomNum, nickName) => {
-      socket.leave(roomNum);
-      delete socketIdArray[nickName];
-      socket.broadcast.to(roomNum).emit('leave', nickName, Object.keys(socketIdArray));
+    socket.on('leave', (roomId, userInfo) => {
+      socket.leave(roomId);
+      delete socketIdArray[userInfo.id];
+      socket.broadcast.to(roomId).emit('leave', {
+        userInfo,
+        attendee: Object.keys(socketIdArray),
+      });
     });
 
-    // 메시징
+    // 메시징 (userMessage, typing, webrtc signaling, etc)
+    // Ojbect의 key값으로 메시지 type을 구분하여 중복형태의 메시지 전송 리스너 생성을 방지한다.
     socket.on('message', (data) => {
-      //console.log('message: ' + data);
+      console.log('message', data);
 
       // 룸 전체전송
       if (data.to == 'all') {
-        socket.broadcast.to(roomId).emit('message', data); // 자신 제외 룸안의 유저
+        socket.broadcast.to(instanceRoomId).emit('message', data); // 자신 제외 룸안의 유저
       } else {
         // 귓속말
         const targetSocketId = socketIdArray[data.to];
@@ -53,11 +62,6 @@ module.exports = (http) => {
           io.sockets.connected[targetSocketId].emit('message', data);
         }
       }
-    });
-
-    // 타이핑
-    socket.on('typing', (nickName) => {
-      socket.broadcast.to(roomId).emit('typing', nickName);
     });
 
     // 소켓 연결해제

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import utils from 'helpers/utils';
+import utils from 'modules/utils';
 import './Balls.scss';
 
 class Balls extends Component {

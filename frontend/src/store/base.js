@@ -1,12 +1,12 @@
 import produce from 'immer';
-import utils from 'helpers/utils';
+import utils from 'modules/utils';
 
 export default {
   // initial state
   state: {
     myInfo: {
-      id: 'user1',
-      nickname: '짱구',
+      id: utils.getUUID(),
+      nickname: 'JS',
       profileImage:
         'https://lh3.googleusercontent.com/-NWx_E8i2cEE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcyW9Y7YloaN8IvNg58Y_ewM2DRKw.CMID/s32-c/photo.jpg',
       participatingTime: 1572010340059,
@@ -16,7 +16,7 @@ export default {
     // handle state changes with pure functions
     updateMyInfo(state, payload) {
       return produce(state, (draft) => {
-        return {
+        draft.myInfo = {
           ...draft.myInfo,
           ...payload,
         };
@@ -26,10 +26,5 @@ export default {
   effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-    async incrementAsync(payload, rootState) {
-      console.log('incrementAsync', payload, rootState);
-      await utils.delay(1000);
-      dispatch.base.increment(payload);
-    },
   }),
 };
