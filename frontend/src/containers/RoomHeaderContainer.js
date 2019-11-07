@@ -12,10 +12,14 @@ class RoomHeaderContainer extends Component {
     };
   }
 
-  handleExit = () => {
-    const { history } = this.props;
+  handleExit = async () => {
+    const { history, roomName, myInfo, leave } = this.props;
     console.log('handleExit', this.props);
 
+    await leave({
+      roomName,
+      myInfo,
+    });
     history.goBack();
   };
 
@@ -44,10 +48,13 @@ class RoomHeaderContainer extends Component {
 
 export default withRouter(
   connect(
-    ({ room }) => ({
+    ({ base, room }) => ({
+      myInfo: base.myInfo,
       users: room.users,
       roomName: room.name,
     }),
-    () => ({})
+    ({ room: { leave } }) => ({
+      leave,
+    })
   )(RoomHeaderContainer)
 );

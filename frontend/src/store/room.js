@@ -93,8 +93,12 @@ export default {
 
     async leave(payload, rootState) {
       console.log('leave', payload, rootState);
-      await utils.delay(1000);
+      const { roomId, myInfo } = payload;
+
       // socket leave
+      socket.emit('leave', roomId, myInfo);
+      // socket.close();
+      await utils.delay(100);
     },
   }),
 };

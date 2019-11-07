@@ -15,7 +15,7 @@
  */
 module.exports = (http) => {
   const io = require('socket.io')(http);
-  let socketIdArray = [];
+  let socketIds = {};
 
   io.on('connection', (socket) => {
     let instanceRoomId = null;
@@ -26,10 +26,10 @@ module.exports = (http) => {
       socket.join(roomId); // 소켓을 특정 room에 binding합니다.
 
       // 유저 목록
-      socketIdArray[userInfo.id] = socket.id;
+      socketIds[userInfo.id] = socket.id;
       io.sockets.in(roomId).emit('join', {
         userInfo,
-        attendee: Object.keys(socketIdArray),
+        attendee: Object.keys(socketIds),
       });
 
       console.log('ROOM JOIN', instanceRoomId);
@@ -38,11 +38,12 @@ module.exports = (http) => {
 
     // 룸퇴장
     socket.on('leave', (roomId, userInfo) => {
+      instanceRoomId = null;
       socket.leave(roomId);
-      delete socketIdArray[userInfo.id];
+      // delete socketIds[userInfo.id];
       socket.broadcast.to(roomId).emit('leave', {
         userInfo,
-        attendee: Object.keys(socketIdArray),
+        attendee: Object.keys(socketIds),
       });
     });
 
@@ -51,12 +52,16 @@ module.exports = (http) => {
     socket.on('message', (data) => {
       console.log('message', data);
 
+      if (!instanceRoomId) {
+        return false;
+      }
+
       // 룸 전체전송
       if (data.to == 'all') {
         socket.broadcast.to(instanceRoomId).emit('message', data); // 자신 제외 룸안의 유저
       } else {
         // 귓속말
-        const targetSocketId = socketIdArray[data.to];
+        const targetSocketId = socketIds[data.to];
         if (targetSocketId) {
           //io.to(targetSocketId).emit('message', data);
           io.sockets.connected[targetSocketId].emit('message', data);
@@ -66,7 +71,7 @@ module.exports = (http) => {
 
     // 소켓 연결해제
     socket.on('disconnect', () => {
-      console.log('a user disconnected', socket.id);
+      console.log('a user disconnected', socket.id, socketIds);
     });
   });
 };
