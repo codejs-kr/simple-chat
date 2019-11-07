@@ -5,9 +5,9 @@ const ChatInput = ({ onSend }) => {
   const textareaEl = useRef(null);
   const [message, setMessage] = useState(null);
 
-  useEffect(() => {
-    console.log('렌더링이 완료되었습니다!', message);
-  }, [message]);
+  // useEffect(() => {
+  //   console.log('렌더링이 완료되었습니다!', message);
+  // }, [message]);
 
   /**
    * TEXTAREA 이벤트 핸들링
