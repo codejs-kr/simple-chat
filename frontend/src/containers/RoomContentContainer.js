@@ -10,7 +10,10 @@ class RoomContentContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      newMessageCount: 0,
+      isUserScroll: false,
+    };
     this.bindSocketEvents();
     this.join();
   }
@@ -19,19 +22,26 @@ class RoomContentContainer extends Component {
     this.scrollTop();
   }
 
+  componentWillUnmount() {
+    socket.removeAllListeners('join');
+    socket.removeAllListeners('leave');
+    socket.removeAllListeners('message');
+  }
+
   bindSocketEvents = () => {
+    console.log('bindSocketEvents');
     const { addMessage } = this.props;
 
     socket.on('join', (data) => {
-      console.log('join', data);
+      console.log('socket join', data);
     });
 
     socket.on('leave', (data) => {
-      console.log('leave', data);
+      console.log('socket leave', data);
     });
 
     socket.on('message', (data) => {
-      console.log('message', data);
+      console.log('socket message', data);
       addMessage(data);
     });
   };

@@ -18,6 +18,7 @@ module.exports = (http) => {
   let socketIds = {};
 
   io.on('connection', (socket) => {
+    console.log('io connection', socket.id);
     let instanceRoomId = null;
 
     // 룸접속
@@ -26,7 +27,11 @@ module.exports = (http) => {
       socket.join(roomId); // 소켓을 특정 room에 binding합니다.
 
       // 유저 목록
-      socketIds[userInfo.id] = socket.id;
+      socketIds[userInfo.id] = {
+        socketId: socket.id,
+        userInfo,
+      };
+
       io.sockets.in(roomId).emit('join', {
         userInfo,
         attendee: Object.keys(socketIds),
@@ -57,7 +62,7 @@ module.exports = (http) => {
       }
 
       // 룸 전체전송
-      if (data.to == 'all') {
+      if (data.to === 'all') {
         socket.broadcast.to(instanceRoomId).emit('message', data); // 자신 제외 룸안의 유저
       } else {
         // 귓속말
@@ -71,7 +76,7 @@ module.exports = (http) => {
 
     // 소켓 연결해제
     socket.on('disconnect', () => {
-      console.log('a user disconnected', socket.id, socketIds);
+      console.log('a user disconnected', socket.id);
     });
   });
 };
