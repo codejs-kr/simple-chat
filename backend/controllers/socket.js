@@ -32,30 +32,34 @@ module.exports = (http) => {
         userInfo,
       };
 
+      // 참여자 목록을 함께 내려주기 위해서 참여 당사자에게도 전달한다.
       io.sockets.in(roomId).emit('join', {
         userInfo,
         attendee: Object.keys(socketIds),
       });
 
-      console.log('ROOM JOIN', instanceRoomId);
+      console.log('join', instanceRoomId);
       // console.log('ROOM LIST', io.sockets.adapter.rooms);
     });
 
     // 룸퇴장
     socket.on('leave', (roomId, userInfo) => {
-      instanceRoomId = null;
       socket.leave(roomId);
-      // delete socketIds[userInfo.id];
       socket.broadcast.to(roomId).emit('leave', {
         userInfo,
         attendee: Object.keys(socketIds),
       });
+
+      delete socketIds[userInfo.id];
+      instanceRoomId = null;
+
+      console.log('leave', roomId, Object.keys(socketIds).length);
     });
 
     // 메시징 (userMessage, typing, webrtc signaling, etc)
     // Ojbect의 key값으로 메시지 type을 구분하여 중복형태의 메시지 전송 리스너 생성을 방지한다.
     socket.on('message', (data) => {
-      console.log('message', data);
+      console.log('message', data, instanceRoomId);
 
       if (!instanceRoomId) {
         return false;

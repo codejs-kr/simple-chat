@@ -14,10 +14,11 @@ class RoomHeaderContainer extends Component {
 
   handleExit = async () => {
     const { history, roomName, myInfo, leave } = this.props;
+    const encodedRoomName = encodeURIComponent(roomName);
     console.log('handleExit', this.props);
 
     await leave({
-      roomName,
+      roomName: encodedRoomName,
       myInfo,
     });
     history.goBack();
