@@ -37,19 +37,21 @@ class HomeContainer extends Component {
           <div className="h-center">Simple Chat</div>
         </HeaderTemplate>
         <ContentTemplate>
-          <Profile
-            myInfo={myInfo}
-            onUpdateNickName={handleUpdateNickName}
-            onUpdateProfileImage={handleUpdateProfileImage}
-          />
+          <form>
+            <Profile
+              myInfo={myInfo}
+              onUpdateNickName={handleUpdateNickName}
+              onUpdateProfileImage={handleUpdateProfileImage}
+            />
 
-          <div id="button-wrap">
-            <Link to="/room/public">
-              <button type="button" className="btn">
-                오픈채팅입장
-              </button>
-            </Link>
-          </div>
+            <div id="button-wrap">
+              <Link to="/room/public">
+                <button type="submit" className="btn">
+                  오픈채팅입장
+                </button>
+              </Link>
+            </div>
+          </form>
         </ContentTemplate>
       </>
     );
