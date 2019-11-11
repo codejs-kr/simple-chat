@@ -1,4 +1,5 @@
 @import '~assets/scss/modules/variables.scss';
+@import '~assets/scss/modules/mixin.scss';
 
 #user-list {
   display: flex;
@@ -10,11 +11,13 @@
   height: 100%;
   background: #fff;
   border-left: solid 1px $gray;
-  transition: right 0.3s ease-out;
+  transition: all 0.2s ease-out;
   z-index: 1;
+  opacity: 0.3;
 
   &.opened {
     right: 0;
+    opacity: 1;
   }
 
   header {
@@ -22,6 +25,7 @@
     flex-basis: 8%;
     padding: 0 10px;
     border-bottom: solid 1px #efefef;
+    font-size: 1.8rem;
 
     display: flex;
     align-items: center;
@@ -29,23 +33,22 @@
 
   ul {
     flex-basis: 92%;
-    padding: 15px;
     list-style: none;
     overflow: auto;
 
     li {
-      margin-bottom: 15px;
       display: flex;
+      justify-content: space-between;
+      padding: 8px 15px;
 
       &:hover {
-        background: $gray;
+        background: rgba(0, 0, 0, 0.05);
       }
     }
 
     .profile {
-      flex-basis: 15%;
+      flex-basis: 22%;
       display: inline-flex;
-      margin-right: 10px;
       vertical-align: top;
       overflow: hidden;
 
@@ -57,8 +60,14 @@
     }
 
     .name {
-      display: block;
-      flex-basis: 85%;
+      flex-basis: calc(78%);
+      display: flex;
+      align-items: center;
+
+      span {
+        display: inline-block;
+        @include ellipsis(160px);
+      }
     }
   }
 }

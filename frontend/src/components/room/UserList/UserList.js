@@ -2,17 +2,6 @@ import React from 'react';
 import './UserList.scss';
 
 const UserList = ({ isActive, users }) => {
-  const Item = ({ data }) => {
-    return (
-      <li>
-        <span className="profile">
-          <img src={data.profileImage} alt={data.nickname} />
-        </span>
-        <span className="name">{data.nickname}</span>
-      </li>
-    );
-  };
-
   let result = [];
   for (const id in users) {
     result.push(<Item data={users[id]} />);
@@ -23,6 +12,20 @@ const UserList = ({ isActive, users }) => {
       <header>참여자목록</header>
       <ul>{result}</ul>
     </section>
+  );
+};
+
+// UserList 내부에 있으면 여닫을때마다 리 랜더링 된다
+const Item = ({ data }) => {
+  return (
+    <li>
+      <span className="profile">
+        <img src={data.profileImage} alt={data.nickname} />
+      </span>
+      <p className="name">
+        <span>{data.nickname}</span>
+      </p>
+    </li>
   );
 };
 
