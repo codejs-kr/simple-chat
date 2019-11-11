@@ -8,10 +8,10 @@ const UserList = ({ isActive, users }) => {
   }
 
   return (
-    <section id="user-list" className={isActive ? 'opened' : ''}>
+    <div id="user-list" className={isActive ? 'opened' : ''}>
       <header>참여자목록</header>
       <ul>{result}</ul>
-    </section>
+    </div>
   );
 };
 

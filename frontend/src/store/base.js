@@ -4,6 +4,7 @@ import utils from 'modules/utils';
 export default {
   // initial state
   state: {
+    overlay: false,
     myInfo: {
       id: utils.getUUID(),
       nickname: 'JS',
@@ -14,6 +15,11 @@ export default {
   },
   reducers: {
     // handle state changes with pure functions
+    updateOverlayState(state, payload) {
+      return produce(state, (draft) => {
+        draft.overlay = payload;
+      });
+    },
     updateMyInfo(state, payload) {
       return produce(state, (draft) => {
         draft.myInfo = {

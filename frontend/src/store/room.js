@@ -83,15 +83,21 @@ export default {
     resetState() {
       return initialState;
     },
-    toggleActiveUserList(state, payload) {
+    updateActiveUserList(state, payload) {
       return produce(state, (draft) => {
-        draft.isActiveUserList = !draft.isActiveUserList;
+        draft.isActiveUserList = payload;
       });
     },
   },
   effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
+
+    /**
+     * 메시지 전송처리
+     * @param {*} payload
+     * @param {*} rootState
+     */
     async send(payload, rootState) {
       const { base } = rootState;
       const { addUserMessage } = dispatch.room;
@@ -111,6 +117,11 @@ export default {
       addUserMessage(data);
     },
 
+    /**
+     * 나가기 처리
+     * @param {*} payload
+     * @param {*} rootState
+     */
     async leave(payload, rootState) {
       console.log('leave', payload, rootState);
       const { resetState } = dispatch.room;
@@ -119,6 +130,21 @@ export default {
       socket.emit('leave', roomName, myInfo);
       await utils.delay(100);
       resetState();
+    },
+
+    /**
+     * 참여자 목록 노출 상태 처리
+     * @param {*} payload
+     * @param {*} rootState
+     */
+    toggleActiveUserList(payload, rootState) {
+      const { updateOverlayState } = dispatch.base;
+      const { updateActiveUserList } = dispatch.room;
+      const { room } = rootState;
+      const isActive = !room.isActiveUserList;
+
+      updateOverlayState(isActive);
+      updateActiveUserList(isActive);
     },
   }),
 };
