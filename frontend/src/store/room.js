@@ -9,6 +9,7 @@ import socket from 'modules/socket';
 
 const initialState = {
   name: '오픈채팅방',
+  isActiveUserList: false,
   users: [
     {
       id: 'user1',
@@ -81,6 +82,11 @@ export default {
     },
     resetState() {
       return initialState;
+    },
+    toggleActiveUserList(state, payload) {
+      return produce(state, (draft) => {
+        draft.isActiveUserList = !draft.isActiveUserList;
+      });
     },
   },
   effects: (dispatch) => ({

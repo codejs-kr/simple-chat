@@ -31,14 +31,22 @@ class RoomContentContainer extends Component {
 
   onJoin = (data) => {
     console.log('socket onJoin', data);
-    const { addUser, addSystemMessage } = this.props;
-    const { userInfo } = data;
+    const { myInfo, addUser, addSystemMessage } = this.props;
+    const { userInfo, attendees } = data;
+    const isMine = myInfo.id === userInfo.id;
 
-    addUser(userInfo);
-    addSystemMessage({
-      ...userInfo,
-      message: `${userInfo.nickname}님이 입장했습니다.`,
-    });
+    // 방에 이미 참여한 사람들의 정보를 셋업한다.
+    if (isMine) {
+      for (const id in attendees) {
+        addUser(attendees[id]);
+      }
+    } else {
+      addUser(userInfo);
+      addSystemMessage({
+        ...userInfo,
+        message: `${userInfo.nickname}님이 입장했습니다.`,
+      });
+    }
   };
 
   onLeave = (data) => {

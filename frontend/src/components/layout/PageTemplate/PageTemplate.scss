@@ -16,6 +16,9 @@
   }
 
   #btn-people {
+    position: relative;
+    z-index: 2;
+
     .count {
       display: inline-block;
       margin-right: 4px;
