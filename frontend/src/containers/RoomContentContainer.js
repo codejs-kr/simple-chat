@@ -14,6 +14,7 @@ class RoomContentContainer extends Component {
       newMessageCount: 0,
       isUserScroll: false,
     };
+
     this.bindSocketEvents();
     this.join();
   }
@@ -28,22 +29,44 @@ class RoomContentContainer extends Component {
     socket.removeAllListeners('message');
   }
 
+  onJoin = (data) => {
+    console.log('socket onJoin', data);
+    const { addUser, addSystemMessage } = this.props;
+    const { userInfo } = data;
+
+    addUser(userInfo);
+    addSystemMessage({
+      ...userInfo,
+      message: `${userInfo.nickname}님이 입장했습니다.`,
+    });
+  };
+
+  onLeave = (data) => {
+    console.log('socket onLeave', data);
+    const { removeUser, addSystemMessage } = this.props;
+    const { userInfo } = data;
+
+    removeUser(userInfo);
+    addSystemMessage({
+      ...userInfo,
+      message: `${userInfo.nickname}님이 퇴장했습니다.`,
+    });
+  };
+
+  onMessage = (data) => {
+    console.log('socket onMessage', data);
+    const { addUserMessage } = this.props;
+
+    addUserMessage(data);
+  };
+
   bindSocketEvents = () => {
     console.log('bindSocketEvents');
-    const { addMessage } = this.props;
+    const { onJoin, onLeave, onMessage } = this;
 
-    socket.on('join', (data) => {
-      console.log('socket join', data);
-    });
-
-    socket.on('leave', (data) => {
-      console.log('socket leave', data);
-    });
-
-    socket.on('message', (data) => {
-      console.log('socket message', data);
-      addMessage(data);
-    });
+    socket.on('join', onJoin);
+    socket.on('leave', onLeave);
+    socket.on('message', onMessage);
   };
 
   join = () => {
@@ -83,8 +106,11 @@ export default connect(
     roomName: room.name,
     messages: room.messages,
   }),
-  ({ room: { send, addMessage } }) => ({
+  ({ room: { send, addUser, removeUser, addUserMessage, addSystemMessage } }) => ({
     send,
-    addMessage,
+    addUser,
+    removeUser,
+    addUserMessage,
+    addSystemMessage,
   })
 )(RoomContentContainer);
