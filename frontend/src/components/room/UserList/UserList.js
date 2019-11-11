@@ -4,7 +4,7 @@ import './UserList.scss';
 const UserList = ({ isActive, users }) => {
   let result = [];
   for (const id in users) {
-    result.push(<Item data={users[id]} />);
+    result.push(<Item key={id} data={users[id]} />);
   }
 
   return (
