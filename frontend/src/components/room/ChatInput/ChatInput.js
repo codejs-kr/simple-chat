@@ -23,7 +23,7 @@ const ChatInput = ({ onSend }) => {
    * 키보드 이벤트 핸들링
    */
   const handleKeyDown = (e) => {
-    console.log('handleKeyDown', e);
+    // console.log('handleKeyDown', e);
     const ENTER = e.key === 'Enter';
     const SHIFT = e.shiftKey;
 

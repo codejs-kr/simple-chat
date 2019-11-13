@@ -1,21 +1,46 @@
 @import '~assets/scss/modules/variables.scss';
 $size: 80px;
+$color: gold;
 
 #profile {
   width: 100%;
 
-  img {
-    display: inline-block;
-    margin-bottom: 10px;
-    width: $size;
-    height: $size;
-    border-radius: 50%;
+  #image-wrap {
+    button {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 12px;
+
+      &:hover {
+        i {
+          opacity: 1;
+        }
+      }
+    }
+
+    img {
+      display: inline-block;
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+      border: solid 3px $color;
+    }
+
+    i {
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      opacity: 0.3;
+    }
   }
 
-  input {
-    width: 80%;
+  #nickname-wrap {
     margin-bottom: 30px;
-    font-size: $font-size-default;
-    text-align: center;
+
+    input {
+      width: 80%;
+      font-size: $font-size-default;
+      text-align: center;
+    }
   }
 }

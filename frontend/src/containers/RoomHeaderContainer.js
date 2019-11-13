@@ -2,29 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { HeaderTemplate } from 'components/layout';
+import UserList from 'components/room/UserList';
 
 class RoomHeaderContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      openedUserList: false,
-    };
-  }
-
   handleExit = async () => {
     const { history, roomName, myInfo, leave } = this.props;
+    const encodedRoomName = encodeURIComponent(roomName);
     console.log('handleExit', this.props);
 
     await leave({
-      roomName,
+      roomName: encodedRoomName,
       myInfo,
     });
     history.goBack();
   };
 
   render() {
-    const { users, roomName } = this.props;
+    const { users, roomName, isActiveUserList, toggleActiveUserList } = this.props;
     const userCount = users.length;
 
     return (
@@ -36,11 +30,19 @@ class RoomHeaderContainer extends Component {
         </div>
         <div className="h-center">{roomName}</div>
         <div className="h-right">
-          <button type="button" id="btn-people">
-            <span className="count">{userCount}</span>
-            <i className="material-icons">people</i>
+          <button type="button" id="btn-people" onClick={toggleActiveUserList}>
+            {isActiveUserList ? (
+              <i className="material-icons">close</i>
+            ) : (
+              <>
+                <span className="count">{userCount}</span>
+                <i className="material-icons">people</i>
+              </>
+            )}
           </button>
         </div>
+
+        <UserList isActive={isActiveUserList} users={users} />
       </HeaderTemplate>
     );
   }
@@ -52,9 +54,11 @@ export default withRouter(
       myInfo: base.myInfo,
       users: room.users,
       roomName: room.name,
+      isActiveUserList: room.isActiveUserList,
     }),
-    ({ room: { leave } }) => ({
+    ({ room: { leave, toggleActiveUserList } }) => ({
       leave,
+      toggleActiveUserList,
     })
   )(RoomHeaderContainer)
 );

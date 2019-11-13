@@ -7,7 +7,10 @@ const Profile = ({ myInfo, onUpdateNickName }) => {
   return (
     <div id="profile">
       <section id="image-wrap">
-        <img src={profileImage} alt="profile" />
+        <button type="button" onClick={() => {}}>
+          <img src={profileImage} alt="profile" />
+          <i className="material-icons">edit</i>
+        </button>
       </section>
       <section id="nickname-wrap">
         <input

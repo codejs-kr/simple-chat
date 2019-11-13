@@ -15,7 +15,7 @@
  */
 module.exports = (http) => {
   const io = require('socket.io')(http);
-  let socketIds = {};
+  let attendees = {}; // 서버에 연결된 사용자, 소켓정보를 담아 관리합니다.
 
   io.on('connection', (socket) => {
     console.log('io connection', socket.id);
@@ -27,35 +27,38 @@ module.exports = (http) => {
       socket.join(roomId); // 소켓을 특정 room에 binding합니다.
 
       // 유저 목록
-      socketIds[userInfo.id] = {
+      attendees[userInfo.id] = {
+        ...userInfo,
         socketId: socket.id,
-        userInfo,
       };
 
+      // 참여자 목록을 함께 내려주기 위해서 참여 당사자에게도 전달한다.
       io.sockets.in(roomId).emit('join', {
         userInfo,
-        attendee: Object.keys(socketIds),
+        attendees: attendees,
       });
 
-      console.log('ROOM JOIN', instanceRoomId);
+      console.log('join', instanceRoomId, Object.keys(attendees).length);
       // console.log('ROOM LIST', io.sockets.adapter.rooms);
     });
 
     // 룸퇴장
     socket.on('leave', (roomId, userInfo) => {
-      instanceRoomId = null;
       socket.leave(roomId);
-      // delete socketIds[userInfo.id];
       socket.broadcast.to(roomId).emit('leave', {
         userInfo,
-        attendee: Object.keys(socketIds),
       });
+
+      delete attendees[userInfo.id];
+      instanceRoomId = null;
+
+      console.log('leave', roomId, Object.keys(attendees).length);
     });
 
     // 메시징 (userMessage, typing, webrtc signaling, etc)
     // Ojbect의 key값으로 메시지 type을 구분하여 중복형태의 메시지 전송 리스너 생성을 방지한다.
     socket.on('message', (data) => {
-      console.log('message', data);
+      console.log('message', data, instanceRoomId);
 
       if (!instanceRoomId) {
         return false;
@@ -66,7 +69,7 @@ module.exports = (http) => {
         socket.broadcast.to(instanceRoomId).emit('message', data); // 자신 제외 룸안의 유저
       } else {
         // 귓속말
-        const targetSocketId = socketIds[data.to];
+        const targetSocketId = attendees[data.to].socketId;
         if (targetSocketId) {
           //io.to(targetSocketId).emit('message', data);
           io.sockets.connected[targetSocketId].emit('message', data);
