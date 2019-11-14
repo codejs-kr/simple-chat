@@ -18,11 +18,7 @@ $color: gold;
       }
     }
 
-    img {
-      display: inline-block;
-      width: $size;
-      height: $size;
-      border-radius: 50%;
+    .avatar {
       border: solid 3px $color;
     }
 
@@ -30,7 +26,7 @@ $color: gold;
       position: absolute;
       bottom: 0;
       right: -10px;
-      opacity: 0.3;
+      opacity: 0.2;
     }
   }
 

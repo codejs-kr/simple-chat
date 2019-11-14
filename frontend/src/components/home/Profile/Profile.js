@@ -1,4 +1,6 @@
 import React from 'react';
+import Avatar from 'components/common/Avatar';
+import Popover from 'components/common/Popover';
 import './Profile.scss';
 
 const Profile = ({ myInfo, onUpdateNickName }) => {
@@ -8,7 +10,7 @@ const Profile = ({ myInfo, onUpdateNickName }) => {
     <div id="profile">
       <section id="image-wrap">
         <button type="button" onClick={() => {}}>
-          <img src={profileImage} alt="profile" />
+          <Avatar src={profileImage} />
           <i className="material-icons">edit</i>
         </button>
       </section>
@@ -28,6 +30,10 @@ const Profile = ({ myInfo, onUpdateNickName }) => {
           }}
         />
       </section>
+
+      <Popover pos="bottom">
+        <Avatar src={profileImage} alt="profile" />
+      </Popover>
     </div>
   );
 };

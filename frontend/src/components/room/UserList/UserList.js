@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from 'components/common/Avatar';
 import './UserList.scss';
 
 const UserList = ({ isActive, users }) => {
@@ -20,7 +21,7 @@ const Item = ({ data }) => {
   return (
     <li>
       <span className="profile">
-        <img src={data.profileImage} alt={data.nickname} />
+        <Avatar src={data.profileImage} alt={data.nickname} />
       </span>
       <p className="name">
         <span>{data.nickname}</span>

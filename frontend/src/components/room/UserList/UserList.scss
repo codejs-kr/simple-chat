@@ -52,10 +52,16 @@
       vertical-align: top;
       overflow: hidden;
 
-      img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
+      .avatar {
+        display: inherit;
+        width: auto;
+        height: auto;
+
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
       }
     }
 
