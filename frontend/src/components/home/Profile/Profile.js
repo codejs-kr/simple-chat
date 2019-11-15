@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from 'components/common/Avatar';
-import Popover from 'components/common/Popover';
+import ProfileListPopover from 'components/home/ProfileListPopover';
 import './Profile.scss';
 
 const Profile = ({ myInfo, onUpdateNickName }) => {
@@ -31,9 +31,7 @@ const Profile = ({ myInfo, onUpdateNickName }) => {
         />
       </section>
 
-      <Popover pos="bottom">
-        <Avatar src={profileImage} alt="profile" />
-      </Popover>
+      <ProfileListPopover image={profileImage} />
     </div>
   );
 };
