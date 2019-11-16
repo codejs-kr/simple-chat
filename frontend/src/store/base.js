@@ -8,8 +8,7 @@ export default {
     myInfo: {
       id: utils.getUUID(),
       nickname: 'JS',
-      profileImage:
-        'https://lh3.googleusercontent.com/-NWx_E8i2cEE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcyW9Y7YloaN8IvNg58Y_ewM2DRKw.CMID/s80-c/photo.jpg',
+      profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
       participatingTime: 1572010340059,
     },
   },

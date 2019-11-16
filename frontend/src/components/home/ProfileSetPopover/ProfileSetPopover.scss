@@ -1,0 +1,26 @@
+@import '~assets/scss/modules/variables.scss';
+
+#profile-set {
+  // top: 188px;
+  top: 388px;
+
+  button {
+    margin: 5px;
+
+    span {
+      border: solid 2px rgba(0, 0, 0, 0.04);
+    }
+
+    &:hover {
+      span {
+        border-color: $gold-1;
+      }
+    }
+  }
+
+  .current {
+    span {
+      border-color: $gold-2 !important;
+    }
+  }
+}

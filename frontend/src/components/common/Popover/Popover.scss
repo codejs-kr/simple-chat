@@ -1,18 +1,20 @@
 .popover {
   position: absolute;
-  bottom: 20px;
-  left: 10px;
+  top: 10px;
+  left: 0;
+  margin: 10px;
   padding: 10px 20px;
+  background: #fff;
   border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
 
   // arrow
   &::after {
-    display: block;
     content: '';
+    display: block;
     position: absolute;
     top: -18px;
-    left: 20px;
+    left: calc((100% / 2) - 20px);
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 20px solid #fff;
