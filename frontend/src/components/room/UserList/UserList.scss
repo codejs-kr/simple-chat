@@ -1,0 +1,79 @@
+@import '~assets/scss/modules/variables.scss';
+@import '~assets/scss/modules/mixin.scss';
+
+#user-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: -70%;
+  width: 70%;
+  height: 100%;
+  background: #fff;
+  border-left: solid 1px $gray;
+  transition: all 0.2s ease-out;
+  z-index: 2;
+  opacity: 0.3;
+
+  &.opened {
+    right: 0;
+    opacity: 1;
+  }
+
+  header {
+    position: relative;
+    flex-basis: 8%;
+    padding: 0 10px;
+    border-bottom: solid 1px #efefef;
+    font-size: 1.8rem;
+
+    display: flex;
+    align-items: center;
+  }
+
+  ul {
+    flex-basis: 92%;
+    list-style: none;
+    overflow: auto;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 15px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .profile {
+      flex-basis: 22%;
+      display: inline-flex;
+      vertical-align: top;
+      overflow: hidden;
+
+      .avatar {
+        display: inherit;
+        width: auto;
+        height: auto;
+
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .name {
+      flex-basis: calc(78%);
+      display: flex;
+      align-items: center;
+
+      span {
+        display: inline-block;
+        @include ellipsis(160px);
+      }
+    }
+  }
+}

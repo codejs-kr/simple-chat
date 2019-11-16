@@ -7,4 +7,4 @@ Simple chat web application.
 * Detecting typing 
 
 ### TODO
-* React version
+* React version (Now developing)

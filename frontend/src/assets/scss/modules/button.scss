@@ -1,0 +1,23 @@
+@import './variables.scss';
+
+.btn {
+  padding: 0 20px;
+  height: 40px;
+  background: #fff;
+  color: $black;
+  font-size: $font-size-default;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.01);
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.btn {
+  &.primary {
+    background: #1890ff;
+    color: $white;
+  }
+}

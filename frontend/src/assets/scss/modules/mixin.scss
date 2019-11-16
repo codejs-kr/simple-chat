@@ -1,0 +1,7 @@
+// 말줄임
+@mixin ellipsis($width: auto) {
+  width: $width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

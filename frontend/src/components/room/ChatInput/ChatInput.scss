@@ -1,0 +1,37 @@
+@import '~assets/scss/modules/variables';
+
+#chat-form {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+
+  textarea {
+    flex-basis: 85%;
+    display: block;
+    padding: 5px 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 100%;
+    border: 0;
+    border-radius: 8px;
+    resize: none;
+    background: #f7f7f7;
+  }
+
+  button[type='submit'] {
+    flex-basis: 13%;
+    padding: 2px;
+    border: 0;
+    color: $blue;
+    opacity: 0.5;
+    background: transparent;
+
+    .material-icons {
+      font-size: 3rem;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}

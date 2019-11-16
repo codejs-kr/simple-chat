@@ -1,0 +1,42 @@
+@import '~assets/scss/modules/variables.scss';
+$size: 80px;
+$color: gold;
+
+#profile {
+  width: 100%;
+
+  #image-wrap {
+    button {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 12px;
+
+      &:hover {
+        i {
+          opacity: 1;
+        }
+      }
+    }
+
+    .avatar {
+      border: solid 3px $color;
+    }
+
+    i {
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      opacity: 0.2;
+    }
+  }
+
+  #nickname-wrap {
+    margin-bottom: 30px;
+
+    input {
+      width: 80%;
+      font-size: $font-size-default;
+      text-align: center;
+    }
+  }
+}
