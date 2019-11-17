@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from 'components/common/Avatar';
 import AvatarSetPopover from 'components/home/AvatarSetPopover';
 import './Profile.scss';
 
 const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
   const { profileImage, nickname } = myInfo;
+  const [isOpenAvatarset, setOpenAvatarset] = useState(false);
   const maxLength = 15;
   const imageset = [
     'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
@@ -27,12 +28,26 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
     'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/instructor_air_plane_guide_flag_handle_avatar-128.png',
     'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/president_modi_namo_youthicon_leader_PM_avatar-128.png',
     'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/programmer_coder_developer_encoder_engineer_computer_coding-128.png',
+    'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/navy_officer_caption_indian_avatar_pilot_aeronautics-128.png',
+    'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/farmer_hat_farm_avtar_agriculture_grower_human-128.png',
+    'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/police_village_sherif_trust_avatar_military_service-128.png',
+    'https://cdn0.iconfinder.com/data/icons/profession-vol-1/32/painter_drawing_tutor_painting_paint_art_artist-128.png',
+    'https://cdn3.iconfinder.com/data/icons/careers-women-2/64/photographer-tourist-cameraman-shooting-traveler-128.png',
+    'https://cdn3.iconfinder.com/data/icons/astronautics-technology-2/64/Alien-monster-character-space-humanoid-128.png',
+    'https://cdn3.iconfinder.com/data/icons/astronautics-technology-2/64/Astronaut-spaceman-suit-space-128.png',
+    'https://cdn4.iconfinder.com/data/icons/avatar-58/64/Photographer-avatar-occupation-profession-man-human-128.png',
+    'https://cdn4.iconfinder.com/data/icons/avatar-58/64/Florist-avatar-occupation-profession-woman-human-128.png',
+    'https://cdn0.iconfinder.com/data/icons/merry-christmas-41/512/z5-santa-claus-christmas-128.png',
   ];
+
+  const handleAvatarset = () => {
+    setOpenAvatarset(!isOpenAvatarset);
+  };
 
   return (
     <div id="profile">
       <section id="image-wrap">
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={handleAvatarset} className={isOpenAvatarset ? 'active' : ''}>
           <Avatar src={profileImage} />
           <i className="material-icons">edit</i>
         </button>
@@ -54,7 +69,9 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
         />
       </section>
 
-      <AvatarSetPopover imageset={imageset} currentProfile={profileImage} onUpdate={onUpdateProfileImage} />
+      {isOpenAvatarset && (
+        <AvatarSetPopover imageset={imageset} currentProfile={profileImage} onUpdate={onUpdateProfileImage} />
+      )}
     </div>
   );
 };

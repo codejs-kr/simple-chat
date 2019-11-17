@@ -17,6 +17,12 @@ $color: $gold-2;
           opacity: 1;
         }
       }
+
+      &.active {
+        i {
+          opacity: 1;
+        }
+      }
     }
 
     .avatar {
