@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from 'components/common/Avatar';
 import './ChatMessages.scss';
 
 const ChatMessages = ({ myInfo, messages }) => {
@@ -26,7 +27,7 @@ const UserMessage = ({ isMine, data }) => {
   return (
     <li className={className} data-time={time}>
       <div className="profile">
-        <img src={profileImage || defaultProfileImage} alt="profile" />
+        <Avatar src={profileImage || defaultProfileImage} alt="profile" />
       </div>
       <div className="body">
         {!isMine && <span title={nickname}>{nickname}</span>}

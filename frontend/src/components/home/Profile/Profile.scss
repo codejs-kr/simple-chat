@@ -1,15 +1,16 @@
 @import '~assets/scss/modules/variables.scss';
-$size: 80px;
+$size: 100px;
 $color: $gold-2;
 
 #profile {
   width: 100%;
 
   #image-wrap {
+    margin-bottom: 16px;
+
     button {
       position: relative;
       display: inline-block;
-      margin-bottom: 12px;
 
       &:hover {
         i {
@@ -19,6 +20,8 @@ $color: $gold-2;
     }
 
     .avatar {
+      width: $size;
+      height: $size;
       border: solid 3px $color;
     }
 
