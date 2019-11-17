@@ -29,6 +29,12 @@
 
     display: flex;
     align-items: center;
+
+    span {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: 1.4rem;
+    }
   }
 
   ul {

@@ -3,14 +3,18 @@ import Avatar from 'components/common/Avatar';
 import './UserList.scss';
 
 const UserList = ({ isActive, users }) => {
+  console.log('UserList :', users);
+
   let result = [];
-  for (const id in users) {
-    result.push(<Item key={id} data={users[id]} />);
-  }
+  users.map((user) => {
+    result.push(<Item key={user.id} data={user} />);
+  });
 
   return (
     <div id="user-list" className={isActive ? 'opened' : ''}>
-      <header>참여자목록</header>
+      <header>
+        참여자목록<span>({users.length})</span>
+      </header>
       <ul>{result}</ul>
     </div>
   );
