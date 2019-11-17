@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from 'components/common/Avatar';
-import ProfileSetPopover from 'components/home/ProfileSetPopover';
+import AvatarSetPopover from 'components/home/AvatarSetPopover';
 import './Profile.scss';
 
 const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
@@ -54,7 +54,7 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
         />
       </section>
 
-      <ProfileSetPopover imageset={imageset} currentProfile={profileImage} onUpdate={onUpdateProfileImage} />
+      <AvatarSetPopover imageset={imageset} currentProfile={profileImage} onUpdate={onUpdateProfileImage} />
     </div>
   );
 };
