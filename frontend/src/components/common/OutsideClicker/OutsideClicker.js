@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './OutsideClicker.scss';
 
 const useOutsideClick = (ref, onClick) => {
   /**
@@ -29,7 +30,7 @@ const OutsideClicker = ({ children, onClick }) => {
   useOutsideClick(wrapperRef, onClick);
 
   return (
-    <div className="outside-clicker" style={{ display: 'inline-block' }} ref={wrapperRef}>
+    <div className="outside-clicker" ref={wrapperRef}>
       {children}
     </div>
   );
@@ -42,7 +43,7 @@ OutsideClicker.propTypes = {
 
 OutsideClicker.defaultProps = {
   onClick: () => {
-    console.log('onClick');
+    alert('Need click event');
   },
 };
 

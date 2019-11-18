@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Avatar from 'components/common/Avatar';
 import AvatarSetPopover from 'components/home/AvatarSetPopover';
+import OutsideClicker from 'components/common/OutsideClicker';
 import './Profile.scss';
 
 const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
@@ -40,17 +41,23 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
     'https://cdn0.iconfinder.com/data/icons/merry-christmas-41/512/z5-santa-claus-christmas-128.png',
   ];
 
-  const handleAvatarset = () => {
+  const ToggleAvatarset = () => {
     setOpenAvatarset(!isOpenAvatarset);
   };
 
   return (
     <div id="profile">
       <section id="image-wrap">
-        <button type="button" onClick={handleAvatarset} className={isOpenAvatarset ? 'active' : ''}>
-          <Avatar src={profileImage} />
-          <i className="material-icons">edit</i>
-        </button>
+        <OutsideClicker onClick={() => setOpenAvatarset(false)}>
+          <button type="button" id="btn-edit" onClick={ToggleAvatarset} className={isOpenAvatarset ? 'active' : ''}>
+            <Avatar src={profileImage} />
+            <i className="material-icons">edit</i>
+          </button>
+
+          {isOpenAvatarset && (
+            <AvatarSetPopover imageset={imageset} currentProfile={profileImage} onUpdate={onUpdateProfileImage} />
+          )}
+        </OutsideClicker>
       </section>
       <section id="nickname-wrap">
         <input
@@ -68,10 +75,6 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
           }}
         />
       </section>
-
-      {isOpenAvatarset && (
-        <AvatarSetPopover imageset={imageset} currentProfile={profileImage} onUpdate={onUpdateProfileImage} />
-      )}
     </div>
   );
 };

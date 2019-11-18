@@ -8,9 +8,22 @@ $color: $gold-2;
   #image-wrap {
     margin-bottom: 16px;
 
-    button {
+    #btn-edit {
       position: relative;
       display: inline-block;
+
+      .avatar {
+        width: $size;
+        height: $size;
+        border: solid 4px $color;
+      }
+
+      i {
+        position: absolute;
+        bottom: 0;
+        right: -10px;
+        opacity: 0.2;
+      }
 
       &:hover {
         i {
@@ -23,19 +36,6 @@ $color: $gold-2;
           opacity: 1;
         }
       }
-    }
-
-    .avatar {
-      width: $size;
-      height: $size;
-      border: solid 4px $color;
-    }
-
-    i {
-      position: absolute;
-      bottom: 0;
-      right: -10px;
-      opacity: 0.2;
     }
   }
 
