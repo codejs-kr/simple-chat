@@ -11,7 +11,7 @@ const UserList = ({ isActive, users }) => {
   });
 
   return (
-    <div id="user-list" className={isActive ? 'opened' : ''}>
+    <div id="user-list" className={`side-view ${isActive ? 'opened' : ''}`}>
       <header>
         참여자목록<span>({users.length})</span>
       </header>
