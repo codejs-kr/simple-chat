@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { HeaderTemplate } from 'components/layout';
 import UserList from 'components/room/UserList';
+import OutsideClicker from 'components/common/OutsideClicker';
 
 class RoomHeaderContainer extends Component {
   handleExit = async () => {
@@ -42,7 +43,9 @@ class RoomHeaderContainer extends Component {
           </button>
         </div>
 
-        <UserList isActive={isActiveUserList} users={users} />
+        <OutsideClicker onClick={() => toggleActiveUserList(false)}>
+          <UserList isActive={isActiveUserList} users={users} />
+        </OutsideClicker>
       </HeaderTemplate>
     );
   }
