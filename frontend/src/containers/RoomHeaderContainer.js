@@ -9,7 +9,7 @@ class RoomHeaderContainer extends Component {
   handleExit = async () => {
     const { history, roomName, myInfo, leave } = this.props;
     const encodedRoomName = encodeURIComponent(roomName);
-    console.log('handleExit', this.props);
+    // console.log('handleExit', this.props);
 
     await leave({
       roomName: encodedRoomName,
@@ -43,7 +43,7 @@ class RoomHeaderContainer extends Component {
           </button>
         </div>
 
-        <OutsideClicker onClick={() => toggleActiveUserList(false)}>
+        <OutsideClicker onClick={() => isActiveUserList && toggleActiveUserList(false)}>
           <UserList isActive={isActiveUserList} users={users} />
         </OutsideClicker>
       </HeaderTemplate>
