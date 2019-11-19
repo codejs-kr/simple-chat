@@ -128,7 +128,7 @@ export default {
       const { roomName, myInfo } = payload;
 
       socket.emit('leave', roomName, myInfo);
-      await utils.delay(100);
+      await utils.delay(10);
       resetState();
     },
 
@@ -141,7 +141,11 @@ export default {
       const { updateOverlayState } = dispatch.base;
       const { updateActiveUserList } = dispatch.room;
       const { room } = rootState;
-      const isActive = !room.isActiveUserList;
+      let isActive = !room.isActiveUserList;
+
+      if (typeof payload === 'boolean') {
+        isActive = payload;
+      }
 
       updateOverlayState(isActive);
       updateActiveUserList(isActive);
