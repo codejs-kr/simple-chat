@@ -11,7 +11,7 @@
     "nodemon": "^1.19.4"
   },
   "engine": {
-    "node": "^12.13.0"
+    "node": "^10.16.*"
   },
   "scripts": {
     "start": "node app",
