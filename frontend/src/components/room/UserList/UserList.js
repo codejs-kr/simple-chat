@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from 'components/common/Avatar';
+import SideViewTemplate from 'components/layout/SideViewTemplate';
 import './UserList.scss';
 
 const UserList = ({ isActive, users }) => {
@@ -11,12 +12,12 @@ const UserList = ({ isActive, users }) => {
   });
 
   return (
-    <div id="user-list" className={`side-view ${isActive ? 'opened' : ''}`}>
+    <SideViewTemplate id="user-list" isActive={isActive}>
       <header>
         참여자목록<span>({users.length})</span>
       </header>
       <ul>{result}</ul>
-    </div>
+    </SideViewTemplate>
   );
 };
 

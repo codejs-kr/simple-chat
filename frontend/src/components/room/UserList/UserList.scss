@@ -2,24 +2,6 @@
 @import '~assets/scss/modules/mixin.scss';
 
 #user-list {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  right: -70%;
-  width: 70%;
-  height: 100%;
-  background: #fff;
-  border-left: solid 1px $gray;
-  transition: all 0.2s ease-out;
-  z-index: 2;
-  opacity: 0.3;
-
-  &.opened {
-    right: 0;
-    opacity: 1;
-  }
-
   header {
     position: relative;
     flex-basis: 8%;
