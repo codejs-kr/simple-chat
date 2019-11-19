@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { HeaderTemplate, ContentTemplate } from 'components/layout';
 import Profile from 'components/home/Profile';
+import utils from 'modules/utils';
 
 class HomeContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.inputEl = React.createRef();
   }
 
   handleUpdateNickName = (nickname) => {
     const { updateMyInfo } = this.props;
+    const inputEl = this.inputEl.current;
+    inputEl.classList.remove('error');
 
     updateMyInfo({
       nickname,
@@ -27,9 +30,25 @@ class HomeContainer extends Component {
     });
   };
 
+  handleSubmit = async () => {
+    const { history, myInfo } = this.props;
+    const inputEl = this.inputEl.current;
+    // console.log('handleSubmit', myInfo, history);
+
+    if (!myInfo.nickname) {
+      inputEl.classList.remove('error');
+      await utils.delay(10);
+      inputEl.classList.add('error');
+      return false;
+    }
+
+    history.push('/room/public');
+    return false;
+  };
+
   render() {
     const { myInfo } = this.props;
-    const { handleUpdateNickName, handleUpdateProfileImage } = this;
+    const { inputEl, handleUpdateNickName, handleUpdateProfileImage, handleSubmit } = this;
 
     return (
       <>
@@ -37,19 +56,18 @@ class HomeContainer extends Component {
           <div className="h-center">Simple Chat</div>
         </HeaderTemplate>
         <ContentTemplate>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Profile
+              inputEl={inputEl}
               myInfo={myInfo}
               onUpdateNickName={handleUpdateNickName}
               onUpdateProfileImage={handleUpdateProfileImage}
             />
 
             <div id="button-wrap">
-              <Link to="/room/public">
-                <button type="submit" className="btn">
-                  오픈채팅입장
-                </button>
-              </Link>
+              <button type="submit" className="btn">
+                오픈채팅입장
+              </button>
             </div>
           </form>
         </ContentTemplate>
@@ -58,11 +76,13 @@ class HomeContainer extends Component {
   }
 }
 
-export default connect(
-  ({ base }) => ({
-    myInfo: base.myInfo,
-  }),
-  ({ base: { updateMyInfo } }) => ({
-    updateMyInfo,
-  })
-)(HomeContainer);
+export default withRouter(
+  connect(
+    ({ base }) => ({
+      myInfo: base.myInfo,
+    }),
+    ({ base: { updateMyInfo } }) => ({
+      updateMyInfo,
+    })
+  )(HomeContainer)
+);

@@ -4,7 +4,7 @@ import AvatarSetPopover from 'components/home/AvatarSetPopover';
 import OutsideClicker from 'components/common/OutsideClicker';
 import './Profile.scss';
 
-const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
+const Profile = ({ inputEl, myInfo, onUpdateNickName, onUpdateProfileImage }) => {
   const { profileImage, nickname } = myInfo;
   const [isOpenAvatarset, setOpenAvatarset] = useState(true);
   const maxLength = 15;
@@ -27,6 +27,7 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
       </section>
       <section id="nickname-wrap">
         <input
+          ref={inputEl}
           type="text"
           className="input"
           defaultValue={nickname}
@@ -34,10 +35,7 @@ const Profile = ({ myInfo, onUpdateNickName, onUpdateProfileImage }) => {
           placeholder="Enter nickname"
           onChange={(e) => {
             const value = e.target.value;
-
-            if (value) {
-              onUpdateNickName(value);
-            }
+            onUpdateNickName(value);
           }}
         />
       </section>
