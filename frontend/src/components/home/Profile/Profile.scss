@@ -1,6 +1,5 @@
 @import '~assets/scss/modules/variables.scss';
 $size: 100px;
-$color: $gold-2;
 
 #profile {
   width: 100%;
@@ -11,11 +10,13 @@ $color: $gold-2;
     #btn-edit {
       position: relative;
       display: inline-block;
+      outline: 0;
 
       .avatar {
         width: $size;
         height: $size;
-        border: solid 4px $color;
+        border: solid 4px $gold-2;
+        transition: all 0.1s ease-in-out;
       }
 
       i {
@@ -31,7 +32,12 @@ $color: $gold-2;
         }
       }
 
+      &:focus,
       &.active {
+        .avatar {
+          border-color: $blue;
+        }
+
         i {
           opacity: 1;
         }

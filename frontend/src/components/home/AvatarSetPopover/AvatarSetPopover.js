@@ -3,10 +3,11 @@
 import React from 'react';
 import Popover from 'components/common/Popover';
 import Avatar from 'components/common/Avatar';
+import imagesetData from './imagesetData';
 import './AvatarSetPopover.scss';
 
 const AvatarSetPopover = React.memo(
-  ({ imageset, currentProfile, onUpdate }) => {
+  ({ imageset = imagesetData, currentProfile, onUpdate }) => {
     // console.log('AvatarSetPopover :', currentProfile);
 
     return (
@@ -24,7 +25,7 @@ const AvatarSetPopover = React.memo(
     );
   },
   (prevProps, nextProps) => {
-    console.log('React.memo', prevProps, prevProps === nextProps);
+    // console.log('React.memo', prevProps, prevProps === nextProps);
     return prevProps.currentProfile === nextProps.currentProfile;
   }
 );

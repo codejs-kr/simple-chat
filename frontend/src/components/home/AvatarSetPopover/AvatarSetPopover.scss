@@ -5,21 +5,30 @@
 
   button {
     margin: 5px;
+    outline: 0;
 
     span {
-      border: solid 2px rgba(0, 0, 0, 0.04);
+      border: solid 2px rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus {
+      span {
+        border-style: dashed;
+        border-color: $blue;
+      }
     }
 
     &:hover {
       span {
-        border-color: $gold-1;
+        border-color: $blue;
       }
     }
   }
 
   .current {
     span {
-      border-color: $gold-2 !important;
+      border-style: solid !important;
+      border-color: $blue !important;
     }
   }
 }
