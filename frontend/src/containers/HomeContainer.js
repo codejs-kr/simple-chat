@@ -8,7 +8,6 @@ import utils from 'modules/utils';
 class HomeContainer extends Component {
   constructor(props) {
     super(props);
-
     this.inputEl = React.createRef();
   }
 

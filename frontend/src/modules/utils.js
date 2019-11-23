@@ -25,10 +25,37 @@ const delay = (time) => {
   return new Promise((resolve) => setTimeout(() => resolve(), time));
 };
 
+/**
+ * 로컬스토리지 저장
+ * @param {*} key
+ * @param {*} value
+ */
+const setStorage = (key, value) => {
+  return localStorage.setItem(key, value);
+};
+
+/**
+ * 로컬스토리지 조회
+ * @param {*} key
+ */
+const getStorage = (key) => {
+  return localStorage.getItem(key);
+};
+
+/**
+ * 타임스템프
+ */
+const getTime = () => {
+  return new Date().getTime();
+};
+
 export default {
   isDev,
   isMobile,
   getRandomNumber,
   getUUID,
   delay,
+  setStorage,
+  getStorage,
+  getTime,
 };
