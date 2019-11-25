@@ -1,0 +1,17 @@
+@import '~assets/scss/modules/variables';
+$size: 120px;
+
+#chat-notification {
+  position: fixed;
+  bottom: 185px;
+  left: calc(50% - (#{$size} / 2));
+
+  padding: 5px 12px;
+  width: $size;
+  background: $blue;
+  color: $white;
+  text-align: center;
+  font-size: 1.4rem;
+  border-radius: 10px;
+  transition: bottom 0.15s ease-in-out;
+}
