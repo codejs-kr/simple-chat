@@ -4,23 +4,32 @@ import { ContentTemplate } from 'components/layout';
 import ChatWrap from 'components/room/ChatWrap';
 import ChatInput from 'components/room/ChatInput';
 import ChatMessages from 'components/room/ChatMessages';
+import ChatNotification from 'components/room/ChatNotification';
 import socket from 'modules/socket';
+import _ from 'lodash';
 
 class RoomContentContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      newMessageCount: 0,
-      isUserScroll: false,
+      scrolled: false,
     };
 
     this.bindSocketEvents();
     this.join();
   }
 
+  componentDidMount() {
+    //
+  }
+
   componentDidUpdate() {
-    this.scrollTop();
+    const { scrolled } = this.state;
+
+    if (!scrolled) {
+      this.scrollBottom();
+    }
   }
 
   componentWillUnmount() {
@@ -68,6 +77,18 @@ class RoomContentContainer extends Component {
     addUserMessage(data);
   };
 
+  onScroll = (e) => {
+    console.log('onScroll', e);
+    const targetEl = document.querySelector('#chat section');
+    const scrolled = targetEl.scrollHeight !== targetEl.clientHeight + targetEl.scrollTop;
+
+    this.setState({
+      scrolled,
+    });
+
+    console.log('onScroll scrolled', scrolled);
+  };
+
   bindSocketEvents = () => {
     console.log('bindSocketEvents');
     const { onJoin, onLeave, onMessage } = this;
@@ -84,7 +105,7 @@ class RoomContentContainer extends Component {
     socket.emit('join', encodedRoomName, myInfo);
   };
 
-  scrollTop = () => {
+  scrollBottom = () => {
     const targetEl = document.querySelector('#chat section');
 
     return (targetEl.scrollTop = targetEl.scrollHeight);
@@ -92,12 +113,15 @@ class RoomContentContainer extends Component {
 
   render() {
     const { myInfo, messages, send } = this.props;
+    const { scrolled } = this.state;
+    const { scrollBottom, onScroll } = this;
 
     return (
       <ContentTemplate>
         <ChatWrap>
-          <section>
+          <section onScroll={_.debounce(onScroll, 500)}>
             <ChatMessages myInfo={myInfo} messages={messages} />
+            {scrolled && <ChatNotification onClick={scrollBottom} />}
           </section>
           <section>
             <ChatInput onSend={send} />

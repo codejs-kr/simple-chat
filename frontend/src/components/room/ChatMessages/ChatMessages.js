@@ -21,13 +21,12 @@ const ChatMessages = ({ myInfo, messages }) => {
 
 const UserMessage = ({ isMine, data }) => {
   const className = `chat ${isMine ? 'mine' : 'attendee'}`;
-  const defaultProfileImage = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
   const { profileImage, nickname, message, time } = data;
 
   return (
     <li className={className} data-time={time}>
       <div className="profile">
-        <Avatar src={profileImage || defaultProfileImage} alt="profile" />
+        <Avatar src={profileImage} alt="profile" />
       </div>
       <div className="body">
         {!isMine && <span title={nickname}>{nickname}</span>}
