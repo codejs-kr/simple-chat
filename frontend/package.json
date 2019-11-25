@@ -13,6 +13,7 @@
     "@babel/polyfill": "^7.6.0",
     "@rematch/core": "^1.2.0",
     "immer": "^4.0.2",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
