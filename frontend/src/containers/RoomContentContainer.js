@@ -4,7 +4,7 @@ import { ContentTemplate } from 'components/layout';
 import ChatWrap from 'components/room/ChatWrap';
 import ChatInput from 'components/room/ChatInput';
 import ChatMessages from 'components/room/ChatMessages';
-import ChatNotification from 'components/room/ChatNotification';
+import ScrollDownButton from 'components/room/ScrollDownButton';
 import socket from 'modules/socket';
 import _ from 'lodash';
 
@@ -124,7 +124,7 @@ class RoomContentContainer extends Component {
         <ChatWrap>
           <section onScroll={_.debounce(onScroll, 300)}>
             <ChatMessages myInfo={myInfo} messages={messages} />
-            {scrolled && <ChatNotification onClick={handleScrollButton} />}
+            {scrolled && <ScrollDownButton onClick={handleScrollButton} />}
           </section>
           <section>
             <ChatInput onSend={send} />

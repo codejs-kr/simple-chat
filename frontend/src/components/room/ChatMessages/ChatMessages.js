@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from 'components/common/Avatar';
+import moment from 'moment';
 import './ChatMessages.scss';
 
 const ChatMessages = ({ myInfo, messages }) => {
@@ -29,8 +30,15 @@ const UserMessage = ({ isMine, data }) => {
         <Avatar src={profileImage} alt="profile" />
       </div>
       <div className="body">
-        {!isMine && <span title={nickname}>{nickname}</span>}
-        <p>{message}</p>
+        {!isMine && (
+          <span className="nickname" title={nickname}>
+            {nickname}
+          </span>
+        )}
+        <p>
+          {message}
+          <span className="time">{moment(time).format('LT')}</span>
+        </p>
       </div>
     </li>
   );
