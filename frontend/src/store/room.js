@@ -41,6 +41,38 @@ const initialState = {
       message: 'hi~',
       time: 1572010340059,
     },
+    {
+      type: 'chat',
+      id: 'user1',
+      nickname: '짱구', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
+      profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
+      message: '안녕하세요',
+      time: 1572010340059,
+    },
+    {
+      type: 'chat',
+      id: 'user2',
+      nickname: '짱구엄마', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
+      profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1661/menu/2/html/f131611716040131952(0).jpg',
+      message: 'hi~',
+      time: 1572010340059,
+    },
+    {
+      type: 'chat',
+      id: 'user1',
+      nickname: '짱구', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
+      profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
+      message: '안녕하세요',
+      time: 1572010340059,
+    },
+    {
+      type: 'chat',
+      id: 'user2',
+      nickname: '짱구엄마', // users에서 탐색하여 정보를 표시하면 방을 나간 사람 정보 노출이 안되기때문에 고민
+      profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1661/menu/2/html/f131611716040131952(0).jpg',
+      message: 'hi~',
+      time: 1572010340059,
+    },
   ],
 };
 

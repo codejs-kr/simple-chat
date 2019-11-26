@@ -1,17 +1,23 @@
 @import '~assets/scss/modules/variables';
-$size: 120px;
+$size: 40px;
 
-#chat-notification {
+#btn-scroll-down {
   position: fixed;
   bottom: 185px;
   left: calc(50% - (#{$size} / 2));
 
-  padding: 5px 12px;
+  display: inline-block;
   width: $size;
-  background: $blue;
+  height: $size;
   color: $white;
+  background: $blue;
   text-align: center;
   font-size: 1.4rem;
-  border-radius: 10px;
+  border-radius: 50%;
   transition: bottom 0.15s ease-in-out;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
 }

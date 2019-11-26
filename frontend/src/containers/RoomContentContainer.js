@@ -13,22 +13,18 @@ class RoomContentContainer extends Component {
     super(props);
 
     this.state = {
-      scrolled: false,
+      scrolled: false, // 내가 스크롤했을땐 신규 메시지에 의한 scrollDown을 멈춘다.
     };
 
     this.bindSocketEvents();
     this.join();
   }
 
-  componentDidMount() {
-    //
-  }
-
   componentDidUpdate() {
     const { scrolled } = this.state;
 
     if (!scrolled) {
-      this.scrollBottom();
+      this.scrollDown();
     }
   }
 
@@ -105,23 +101,30 @@ class RoomContentContainer extends Component {
     socket.emit('join', encodedRoomName, myInfo);
   };
 
-  scrollBottom = () => {
+  scrollDown = () => {
     const targetEl = document.querySelector('#chat section');
 
     return (targetEl.scrollTop = targetEl.scrollHeight);
   };
 
+  handleScrollButton = () => {
+    this.scrollDown();
+    this.setState({
+      scrolled: false,
+    });
+  };
+
   render() {
     const { myInfo, messages, send } = this.props;
     const { scrolled } = this.state;
-    const { scrollBottom, onScroll } = this;
+    const { onScroll, handleScrollButton } = this;
 
     return (
       <ContentTemplate>
         <ChatWrap>
-          <section onScroll={_.debounce(onScroll, 500)}>
+          <section onScroll={_.debounce(onScroll, 300)}>
             <ChatMessages myInfo={myInfo} messages={messages} />
-            {scrolled && <ChatNotification onClick={scrollBottom} />}
+            {scrolled && <ChatNotification onClick={handleScrollButton} />}
           </section>
           <section>
             <ChatInput onSend={send} />
