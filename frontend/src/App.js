@@ -1,6 +1,6 @@
-import React, { Component, Fragment, Suspense } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Iphone, Balls } from 'components/layout';
+import { Iphone, Balls, ThemeChanger } from 'components/layout';
 import Home from 'pages/Home';
 import Room from 'pages/Room';
 import utils from 'modules/utils';
@@ -34,6 +34,7 @@ class App extends Component {
           </Switch>
         </Iphone>
         <Balls />
+        <ThemeChanger />
       </Fragment>
     );
   }
