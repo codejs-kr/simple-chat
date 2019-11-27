@@ -1,3 +1,5 @@
+@import 'assets/scss/modules/mixin';
+
 .ball {
   position: absolute;
   top: 0;
@@ -8,21 +10,5 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
 
-  // animation-duration: 10s;
-  // animation-name: scale;
-  // animation-iteration-count: infinite;
-}
-
-@keyframes scale {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+  @include jelly(0.4s, 1);
 }

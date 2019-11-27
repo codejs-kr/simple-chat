@@ -33,3 +33,25 @@
     transform: translate3d(4px, 0, 0);
   }
 }
+
+// 젤리
+@mixin jelly($time: 0.5s, $loop: infinite) {
+  &:hover {
+    animation: energy $time $loop;
+  }
+}
+
+@keyframes energy {
+  0% {
+    transform: scale (1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.2, 0.8);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
