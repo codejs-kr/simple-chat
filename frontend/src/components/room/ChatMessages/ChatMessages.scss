@@ -25,7 +25,6 @@ $time-pos: -48px;
 
     .body {
       flex-basis: 86%;
-      overflow: hidden;
       font-size: 1.4rem;
 
       .nickname {
@@ -51,7 +50,7 @@ $time-pos: -48px;
         bottom: 0;
         right: $time-pos;
         font-size: 1rem;
-        color: rgb(150, 150, 150);
+        color: #c5c5c5;
       }
     }
 

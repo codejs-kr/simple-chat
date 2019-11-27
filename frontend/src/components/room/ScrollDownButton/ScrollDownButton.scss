@@ -15,10 +15,5 @@ $size: 40px;
   font-size: 1.4rem;
   border: solid 2px #fff;
   border-radius: 50%;
-  transition: bottom 0.15s ease-in-out;
-  opacity: 0.7;
-
-  &:hover {
-    opacity: 1;
-  }
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
 }
