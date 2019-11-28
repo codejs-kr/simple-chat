@@ -1,10 +1,18 @@
 # Nodejs Socket.io - Simple Chat
 Simple chat web application.
 
-### Feature (Now Developing)
-* Room base
-* Secret message
-* Detecting typing 
+### Install
+npm install
 
-### TODO
-* React version (Now developing)
+### Start
+npm run start
+
+### Tech Stack
+- react
+- redux
+- rematch
+- immer
+- lodash
+- moment
+- socket.io
+
