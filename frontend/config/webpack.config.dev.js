@@ -29,7 +29,7 @@ module.exports = {
   devServer: {
     hot: true,
     inline: true,
-    port: 3007,
+    port: 9091,
     contentBase: [distPath],
   },
 
