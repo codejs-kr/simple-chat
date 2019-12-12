@@ -75,6 +75,6 @@
     "start": "webpack-dev-server --config ./config/webpack.config.dev.js --open",
     "restart": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "build": "webpack --config ./config/webpack.config.prod.js",
-    "cypress:open": "cypress open"
+    "test:cypress": "cypress open"
   }
 }
