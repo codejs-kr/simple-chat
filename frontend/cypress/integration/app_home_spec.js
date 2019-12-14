@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/commands/type.html#Arguments
 
-describe('My simple chat app test', () => {
+describe('Simple chat app - home test', () => {
   it('서비스에 접속 되어야 한다', function() {
     cy.visit('/');
   });
@@ -17,15 +17,12 @@ describe('My simple chat app test', () => {
   });
 
   it('닉네임 변경 되어야 한다', () => {
+    cy.get('#nickname-wrap input').clear();
     cy.get('#nickname-wrap input').type('배트맨');
     cy.get('#nickname-wrap input').should('have.value', '배트맨');
   });
 
   it('채팅방에 입장 되어야 한다', () => {
     cy.contains('오픈채팅입장').click();
-  });
-
-  it('채팅방 타이틀이 있어야 한다', () => {
-    cy.get('#header .h-center').should('have.text', '오픈채팅방');
   });
 });
