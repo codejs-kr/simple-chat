@@ -17,7 +17,7 @@ class Balls extends Component {
       const top = getRandomNumber(POS_MIN, POS_MAX);
       const left = getRandomNumber(POS_MIN, POS_MAX);
       const width = 140;
-      const height = getRandomNumber(115, 140);
+      const height = getRandomNumber(100, 140);
       const style = { top: `${top}%`, left: `${left}%`, width: `${width}px`, height: `${height}px` };
 
       result.push(<span className="ball" key={i} style={style} />);
