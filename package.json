@@ -19,7 +19,7 @@
   "scripts": {
     "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm start",
-    "start:test": "cd frontend && npm run test:cypress",
+    "start:test": "cd frontend && npm run test:open",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "test": "concurrently \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:test\""
   }

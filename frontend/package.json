@@ -69,6 +69,7 @@
     "start": "webpack-dev-server --config ./config/webpack.config.dev.js --open",
     "restart": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "build": "webpack --config ./config/webpack.config.prod.js",
-    "test:cypress": "cypress open"
+    "test:open": "cypress open",
+    "test:run": "cypress run --record --key 9d4e46aa-db47-474d-aa14-82442657c9a4"
   }
 }
