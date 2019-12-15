@@ -1,0 +1,26 @@
+{
+  "author": "dodortus",
+  "name": "simple-chat",
+  "version": "0.8.1",
+  "description": "Simple Web chat app",
+  "repository": "https://github.com/dodortus/simple-chat.git",
+  "keywords": [
+    "react",
+    "chat",
+    "socketio"
+  ],
+  "license": "MIT",
+  "engine": {
+    "node": "^10.16.*"
+  },
+  "dependencies": {
+    "concurrently": "^5.0.1"
+  },
+  "scripts": {
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "start:test": "cd frontend && npm run test:cypress",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "test": "concurrently \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:test\""
+  }
+}

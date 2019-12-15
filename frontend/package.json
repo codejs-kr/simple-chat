@@ -2,13 +2,7 @@
   "author": "dodortus",
   "name": "simple-chat-client",
   "version": "0.8.1",
-  "description": "Simple Web chatting",
-  "repository": "https://github.com/dodortus/simple-chat.git",
-  "keywords": [
-    "react",
-    "chat"
-  ],
-  "license": "MIT",
+  "description": "Simple Web chat app",
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "@rematch/core": "^1.2.0",

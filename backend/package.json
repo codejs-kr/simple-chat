@@ -2,7 +2,7 @@
   "author": "dodortus",
   "name": "simple-chat-server",
   "version": "0.8.1",
-  "description": "Simple Web chatting",
+  "description": "Simple Web chat app",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
