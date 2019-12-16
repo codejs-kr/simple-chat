@@ -1,7 +1,7 @@
 {
   "author": "dodortus",
   "name": "simple-chat",
-  "version": "0.8.1",
+  "version": "1.0.1",
   "description": "Simple Web chat app",
   "repository": "https://github.com/dodortus/simple-chat.git",
   "keywords": [
@@ -17,10 +17,11 @@
     "concurrently": "^5.0.1"
   },
   "scripts": {
+    "install": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "test": "concurrently \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:test\"",
     "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm start",
-    "start:test": "cd frontend && npm run test:open",
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "test": "concurrently \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:test\""
+    "start:test": "cd frontend && npm run test:open"
   }
 }
