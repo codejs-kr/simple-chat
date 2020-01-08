@@ -31,7 +31,7 @@ npm run install
 npm start
 ```
 
-## Test E2E (cypress)
+## Test (E2E cypress)
 ``` javascript
 npm run test
 ```
