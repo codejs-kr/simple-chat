@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { srcPath, distPath } = require('./path');
+const { srcPath, buildPath } = require('./path');
 
 module.exports = {
   mode: 'development',
@@ -30,7 +30,7 @@ module.exports = {
     hot: true,
     inline: true,
     port: 9091,
-    contentBase: [distPath],
+    contentBase: [buildPath],
   },
 
   // 모듈 로더

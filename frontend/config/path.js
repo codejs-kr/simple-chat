@@ -11,6 +11,6 @@ module.exports = {
   rootPath: getAbsPath(),
   srcPath: getAbsPath('src'),
   publicPath: getAbsPath('public'),
-  distPath: getAbsPath('dist'),
+  buildPath: getAbsPath('build'),
   getAbsPath,
 };

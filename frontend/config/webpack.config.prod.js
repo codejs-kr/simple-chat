@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const { rootPath, srcPath, distPath } = require('./path');
+const { rootPath, srcPath, buildPath } = require('./path');
 
 module.exports = {
   mode: 'production',
@@ -23,7 +23,7 @@ module.exports = {
 
   // 번들 결과 정보
   output: {
-    path: rootPath,
+    path: buildPath,
     filename: '[name].js?ver=[hash]',
   },
 
@@ -110,7 +110,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: 'dist/img/',
+              outputPath: 'build/img/',
               name: '[name].[hash].[ext]', // 이 속성을 줘야 SCSS에서의 ~statics/* 이미지들도 빌드시 생성 된다 .
             },
           },
@@ -135,7 +135,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin([distPath], {
+    new CleanWebpackPlugin([buildPath], {
       root: rootPath,
     }),
     new HtmlWebpackPlugin({
