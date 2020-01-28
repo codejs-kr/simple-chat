@@ -1,5 +1,5 @@
 import React from 'react';
-import Iphone from './Iphone';
+import Iphone from '../src/components/layout/Iphone';
 
 export default {
   title: 'components|layout/Iphone', // 스토리북에서 보여질 그룹과 경로를 명시
