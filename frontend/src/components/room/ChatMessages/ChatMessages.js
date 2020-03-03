@@ -1,24 +1,41 @@
 import React from 'react';
 import Avatar from 'components/common/Avatar';
 import moment from 'moment';
+
+import { DynamicSizeList as List } from 'react-window';
+
 import './ChatMessages.scss';
 
 const ChatMessages = ({ myInfo, messages }) => {
+  // return (
+  //   <ul id="messages">
+  //     {messages.map((data, i) => {
+  //       // console.log(data, i);
+
+  //       if (data.type === 'chat') {
+  //         const isMine = myInfo.id === data.id;
+  //         return <UserMessage key={i} isMine={isMine} data={data} />;
+  //       }
+
+  //       return <SystemMessage key={i} data={data} />;
+  //     })}
+  //   </ul>
+  // );
+
   return (
-    <ul id="messages">
-      {messages.map((data, i) => {
-        // console.log(data, i);
-
-        if (data.type === 'chat') {
-          const isMine = myInfo.id === data.id;
-          return <UserMessage key={i} isMine={isMine} data={data} />;
-        }
-
-        return <SystemMessage key={i} data={data} />;
-      })}
-    </ul>
+    <List className="List" height={200} itemCount={messages.length} itemData={messages} width={300}>
+      {RefForwardedRow}
+    </List>
   );
 };
+
+const RefForwardedRow = React.forwardRef((props, ref) => <Row {...props} forwardedRef={ref} />);
+
+const Row = ({ data, index, style, forwardedRef }) => (
+  <div ref={forwardedRef} className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
+    {data[index]}
+  </div>
+);
 
 const UserMessage = ({ isMine, data }) => {
   const className = `chat ${isMine ? 'mine' : 'attendee'}`;
