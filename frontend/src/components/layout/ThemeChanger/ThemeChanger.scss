@@ -8,5 +8,9 @@
     margin: 0 5px;
     padding: 5px;
     color: #fff;
+
+    &:hover {
+      color: $gold-2;
+    }
   }
 }
