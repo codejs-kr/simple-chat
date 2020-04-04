@@ -42,11 +42,15 @@ const SystemMessage = ({ data }) => {
   );
 };
 
-const Row = ({ index, style }) => (
-  <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
-    Row {index}
-  </div>
-);
+const Row = ({ data, index, style }) => {
+  console.log('Row', arguments);
+
+  return (
+    <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>
+      Row {index}
+    </div>
+  );
+};
 
 // const ChatMessages = ({ myInfo, messages }) => {
 //   return (
@@ -68,7 +72,7 @@ const Row = ({ index, style }) => (
 const ChatMessages = ({ myInfo, messages }) => (
   <AutoSizer>
     {({ height, width }) => (
-      <List className="List" height={height} itemCount={1000} itemSize={60} width={width}>
+      <List className="messages" width={width} height={height} itemCount={500} itemSize={60} data={messages}>
         {Row}
       </List>
     )}
