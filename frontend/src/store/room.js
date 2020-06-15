@@ -6,7 +6,6 @@ import socket from 'modules/socket';
 // socket leave
 // socket message, typing
 // socket disconnect
-
 const initialState = {
   name: '오픈채팅방',
   isActiveUserList: false,
@@ -32,12 +31,11 @@ const initialState = {
       profileImage: 'http://img.lifestyler.co.kr/uploads/program/1/1765/menu/2/html/f131755988183457049(0).jpg',
       message: '안녕하세요',
       time: 1572010340059,
-    }
+    },
   ],
 };
 
 export default {
-  // initial state
   state: initialState,
   reducers: {
     // handle state changes with pure functions
