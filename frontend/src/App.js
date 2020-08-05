@@ -30,7 +30,6 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/room" component={Room} />
             <Route path="/room/:name" component={Room} />
-            {/* <Route component={NotFound} /> */}
           </Switch>
         </Iphone>
         <Balls />
