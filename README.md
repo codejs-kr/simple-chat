@@ -19,7 +19,7 @@ Chat application
 ``` javascript
 npm install
 ```
-2. All install backend, frontend packages
+2. All install backend and frontend packages
 ``` javascript
 npm run install 
 ```
